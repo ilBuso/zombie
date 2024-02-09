@@ -1,9 +1,7 @@
 #ifndef GAMEOBJECT_HPP
     #define GAMEOBJECT_HPP
 
-        #include <iostream>
-        #include <SDL2/SDL.h>
-        #include "../const.hpp"
+        #include "../game/game.hpp"
 
         class GameObject {
             
@@ -17,6 +15,8 @@
             public:
                 GameObject();
                 ~GameObject();
+
+            
         };
 
 #endif

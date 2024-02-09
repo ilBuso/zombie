@@ -1,10 +1,7 @@
-
 #ifndef GAME_HPP
     #define GAME_HPP
 
-        #include <iostream>
-        #include <SDL2/SDL.h>
-        #include "../const.hpp"
+        #include "../main.hpp"
 
         class Game {
 
@@ -13,6 +10,9 @@
                 int last_frame_time = 0;
                 SDL_Window* window = NULL;
                 SDL_Renderer* renderer = NULL;
+
+                SDL_Texture* player_texture = NULL;
+                SDL_Rect src_rect, dest_rect;
 
             public:
                 Game();     // Constructor

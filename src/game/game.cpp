@@ -1,4 +1,3 @@
-
 #include "game.hpp"
 
 // Constructor
@@ -46,8 +45,11 @@ bool Game::init(void) {
     }
 
     is_running = true;
-    std::cout << "Game Started" << std::endl;
 
+    // texture
+    player_texture = TextureManager:: load_texture("assets/player.png", renderer);
+
+    std::cout << "Game Started" << std::endl;
     return true;
 }
 
@@ -78,10 +80,16 @@ void Game::handle_events() {
 
 void Game::update() {
 
+    dest_rect.w = PLAYER_WIDTH;
+    dest_rect.h = PLAYER_HEIGHT;
+
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
+
+    SDL_RenderCopy(renderer, player_texture, NULL, &dest_rect);
+
     SDL_RenderPresent(renderer);
 }
 
