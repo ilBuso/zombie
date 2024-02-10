@@ -5,17 +5,8 @@
         #include <SDL2/SDL.h>
         #include <SDL2/SDL_image.h>
 
-        #include "./game/game.hpp"
-        #include "./gameobject/gameobject.hpp"
-        #include "./texturemanager/texturemanager.hpp"
+        // Window
+        #define WINDOW_WIDTH 800
+        #define WINDOW_HEIGHT 800
 
 #endif
-
-// Window
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 800
-
-// Player
-#define PLAYER_WIDTH 20
-#define PLAYER_HEIGHT 20
-#define PLAYER_VELOCITY 100

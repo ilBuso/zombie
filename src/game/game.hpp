@@ -3,6 +3,9 @@
 
         #include "../main.hpp"
 
+        #include "../gameobject/gameobject.hpp"
+        #include "../texturemanager/texturemanager.hpp"
+
         class Game {
 
             private:
@@ -10,9 +13,6 @@
                 int last_frame_time = 0;
                 SDL_Window* window = NULL;
                 SDL_Renderer* renderer = NULL;
-
-                SDL_Texture* player_texture = NULL;
-                SDL_Rect src_rect, dest_rect;
 
             public:
                 Game();     // Constructor
