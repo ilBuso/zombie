@@ -3,18 +3,16 @@
 
         #include "../main.hpp"
 
-        #include "../gameobject/gameobject.hpp"
-        #include "../texturemanager/texturemanager.hpp"
-
         class Game {
 
             private:
                 bool is_running = false;
                 int last_frame_time = 0;
-                SDL_Window* window = NULL;
-                SDL_Renderer* renderer = NULL;
+                SDL_Window* window = nullptr;
 
             public:
+                static SDL_Renderer* renderer;
+
                 Game();     // Constructor
                 ~Game();    // Destroyer
 

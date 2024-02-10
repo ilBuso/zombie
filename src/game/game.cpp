@@ -1,4 +1,8 @@
 #include "game.hpp"
+#include "../gameobject/gameobject.hpp"
+#include "../texturemanager/texturemanager.hpp"
+
+SDL_Renderer* Game::renderer = nullptr;
 
 GameObject* player;
 
@@ -49,7 +53,7 @@ bool Game::init(void) {
     is_running = true;
 
     // texture
-    player = new GameObject("assets/player.png", renderer);
+    player = new GameObject("assets/player.png");
 
     std::cout << "Game Started" << std::endl;
     return true;

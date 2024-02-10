@@ -9,7 +9,7 @@
 
 
         public:
-            static SDL_Texture* load_texture(const char* file_path, SDL_Renderer* renderer);
+            static SDL_Texture* load_texture(const char* file_path);
     };
 
 #endif
