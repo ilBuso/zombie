@@ -6,11 +6,11 @@
         #include <SDL2/SDL_image.h>
 
         // Window
-        #define WINDOW_WIDTH 800
-        #define WINDOW_HEIGHT 800
+        #define WINDOW_WIDTH 1000
+        #define WINDOW_HEIGHT 1000
 
         // Map
-        #define MAP_WIDTH 20
-        #define MAP_HEIGHT 25
+        #define MAP_WIDTH 10
+        #define MAP_HEIGHT 10
 
 #endif

@@ -10,14 +10,15 @@
             SDL_Texture* grass;
             SDL_Texture* dirt;
             SDL_Texture* water;
+            SDL_Texture* unknown;
 
-            int map[MAP_WIDTH][MAP_HEIGHT];
+            int map[MAP_HEIGHT][MAP_WIDTH];
 
         public:
             Map();
             ~Map();
 
-            void load_map();
+            void load_map(int array[MAP_HEIGHT][MAP_WIDTH]);
             void draw_map();
     };
             
