@@ -9,7 +9,7 @@ int main() {
     game->init();
 
     // Inital setup
-    // game->setup();
+    game->setup();
 
     // Game loop
     while(game->running()) {

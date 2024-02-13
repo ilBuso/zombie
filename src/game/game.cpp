@@ -52,11 +52,7 @@ bool Game::init(void) {
         return false;
     }
 
-    is_running = true;
-
-    // texture
-    map = new Map();
-    player = new GameObject("assets/player.png");
+    is_running = true;    
 
     std::cout << "Game Started" << std::endl;
     return true;
@@ -70,7 +66,8 @@ void Game::kill() {
 }
 
 void Game::setup() {
-
+    map = new Map();
+    player = new GameObject("assets/player.png");
 }
 
 
