@@ -60,7 +60,7 @@ build:
 	done; \
 	g++ -Wall $(wildcard $(SRC_DIR)/obj/*.o) -o $(EXECUTABLE) $(LIBS) >/dev/null 2>&1; \
 	duration=$$SECONDS; \
-	echo -e "\n\n - Build completed successfully in $$duration seconds"
+	echo -e "\n - Build completed successfully in $$duration seconds"
 
 
 check:
