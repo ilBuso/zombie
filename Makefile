@@ -49,6 +49,9 @@ build:
 	duration=$$SECONDS; \
 	echo -e "\n\n - Build completed successfully in $$duration seconds"
 
+check:
+	@echo " - Checking..."
+
 run:
 	./$(EXECUTABLE)
 
