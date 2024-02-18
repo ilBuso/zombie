@@ -32,7 +32,6 @@ endif
 
 # Output executable
 EXECUTABLE := zombie
-
 build:
 	@echo " - Starting Build"
 	@mkdir -p $(SRC_DIR)/obj
@@ -42,18 +41,27 @@ build:
 	progress="[..................................................]"; \
 	for file in $$(find $(SRC_DIR) -name '*.cpp'); do \
 		g++ -Wall -c $$file -o $(SRC_DIR)/obj/$(notdir $$file).o >/dev/null 2>&1; \
-		completed_files=$$((completed_files + 1)); \
-		percentage=$$((completed_files * 100 / total_files)); \
-		bar_length=$$((percentage * 50 / 100)); \
+		completed_files=$$(($$completed_files + 1)); \
+		percentage=$$(($$completed_files * 100 / $$total_files)); \
+		bar_length=$$(($$percentage * 50 / 100)); \
 		progress="["; \
-		for ((i=0; i<bar_length; i++)); do progress+="="; done; \
-		for ((i=bar_length; i<50; i++)); do progress+="."; done; \
+		i=0; \
+		while [ $$i -lt $$bar_length ]; do \
+			progress+="="; \
+			i=$$(($$i + 1)); \
+		done; \
+		i=$$bar_length; \
+		while [ $$i -lt 50 ]; do \
+			progress+="."; \
+			i=$$(($$i + 1)); \
+		done; \
 		progress+="]"; \
 		printf " - Building       %s %3d%%\r" "$$progress" $$percentage; \
 	done; \
 	g++ -Wall $(wildcard $(SRC_DIR)/obj/*.o) -o $(EXECUTABLE) $(LIBS) >/dev/null 2>&1; \
 	duration=$$SECONDS; \
-echo -e "\n - Build completed successfully in $$duration seconds"
+	echo -e "\n\n - Build completed successfully in $$duration seconds"
+
 
 check:
 	@echo " - Checking..."
