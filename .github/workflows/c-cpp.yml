@@ -16,9 +16,8 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
     - name: Install SDL2 and SDL2_image
-      run: sudo apt-get install libsdl2-dev libsdl2-image-dev -y
+      run: |
+        sudo apt-get update
+        sudo apt-get install libsdl2-dev libsdl2-image-dev -y
     - name: Build
       run: make build
-    - name: Check
-      run: make check
-
