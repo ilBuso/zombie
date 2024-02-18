@@ -1,0 +1,24 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+    
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    - name: Install SDL2 and SDL2_image
+      run: sudo apt-get install libsdl2-dev libsdl2-image-dev -y
+    - name: Build
+      run: make build
+    - name: Check
+      run: make check
+
