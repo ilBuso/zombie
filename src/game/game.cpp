@@ -1,6 +1,6 @@
 #include "game.hpp"
-#include "../map/map.hpp"
 #include "../gameobject/gameobject.hpp"
+#include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -9,15 +9,10 @@ Map* map;
 GameObject* player;
 
 // Constructor
-Game::Game() {
-
-}
+Game::Game() {}
 
 // Destroyer
-Game::~Game() {
-
-}
-
+Game::~Game() {}
 
 /// Functions
 bool Game::init(void) {
@@ -28,13 +23,12 @@ bool Game::init(void) {
     }
 
     // Create window
-    window = SDL_CreateWindow(
-        "zombie",                   // Window tytle
-        SDL_WINDOWPOS_CENTERED,     // X position
-        SDL_WINDOWPOS_CENTERED,     // Y position
-        WINDOW_WIDTH,               // Width
-        WINDOW_HEIGHT,              // Height
-        0                           // Flags
+    window = SDL_CreateWindow("zombie",               // Window tytle
+                              SDL_WINDOWPOS_CENTERED, // X position
+                              SDL_WINDOWPOS_CENTERED, // Y position
+                              WINDOW_WIDTH,           // Width
+                              WINDOW_HEIGHT,          // Height
+                              0                       // Flags
     );
     if (!window) {
         std::cerr << "Error creating SDL Window" << std::endl;
@@ -42,17 +36,16 @@ bool Game::init(void) {
     }
 
     // Create renderer
-    renderer = SDL_CreateRenderer(
-        window,     // Target
-        -1,         // Display
-        0           // Flags
+    renderer = SDL_CreateRenderer(window, // Target
+                                  -1,     // Display
+                                  0       // Flags
     );
     if (!renderer) {
         std::cerr << "Error creating SDL Renderer" << std::endl;
         return false;
     }
 
-    is_running = true;    
+    is_running = true;
 
     std::cout << "Game Started" << std::endl;
     return true;
@@ -69,7 +62,6 @@ void Game::setup() {
     map = new Map();
     player = new GameObject("assets/player.png");
 }
-
 
 void Game::handle_events() {
     SDL_Event event;

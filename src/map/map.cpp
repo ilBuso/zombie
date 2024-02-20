@@ -1,18 +1,20 @@
 #include "map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 
+// clang-format off
 int lvl1[MAP_HEIGHT][MAP_WIDTH] = {
-    { 0, 1, 2, 3, 0, 0, 0, 0, 0, 0 },
-    { 0, 1, 2, 3, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    {0, 1, 2, 3, 0, 0, 0, 0, 0, 0},
+    {0, 1, 2, 3, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
+// clang-format on
 
 Map::Map() {
     grass = TextureManager::load_texture("assets/tiles/grass.png");
@@ -29,9 +31,7 @@ Map::Map() {
     dest_rect.w = dest_rect.h = 32;
 }
 
-Map::~Map() {
-
-}
+Map::~Map() {}
 
 void Map::load_map(int array[MAP_HEIGHT][MAP_WIDTH]) {
     for (int row = 0; row < MAP_HEIGHT; row++) {
@@ -67,4 +67,4 @@ void Map::draw_map() {
             }
         }
     }
-} 
+}

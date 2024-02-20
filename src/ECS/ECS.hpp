@@ -10,7 +10,7 @@
     using component_type_id = std::size_t;
 
     inline component_type_id get_component_type_id();
-    template <typename T> inline component_type_id get_component_id() noexcept;
+    template <typename T> inline component_type_id get_component_type_id() noexcept;
 
 
     constexpr std::size_t max_components = 32;
@@ -46,6 +46,10 @@
             void destroy();
 
             template <typename T> bool has_components() const;
+
+            template <typename T, typename... T_args> T& add_component(T_args&&... m_args);
+
+            template <typename T> T& get_component() const;
     };
 
 #endif

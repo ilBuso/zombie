@@ -29,7 +29,7 @@ void Transform::update() {
 }
 
 void Transform::draw() {
-    //TODO: write shit
+    // TODO: write shit
 }
 
 void Transform::set_position(float x, float y) {

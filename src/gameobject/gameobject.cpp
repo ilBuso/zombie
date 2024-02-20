@@ -1,14 +1,12 @@
 #include "gameobject.hpp"
-#include "../texturemanager/texturemanager.hpp"
 #include "../game/game.hpp"
+#include "../texturemanager/texturemanager.hpp"
 
 GameObject::GameObject(const char* texture_file) {
     this->texture = TextureManager::load_texture(texture_file);
 }
 
-GameObject::~GameObject() {
-
-}
+GameObject::~GameObject() {}
 
 void GameObject::update() {
     x_position = 0;
@@ -19,7 +17,7 @@ void GameObject::update() {
     src_rect.x = 0;
     src_rect.y = 0;
     src_rect.w = 128;
-    src_rect.h = 128; 
+    src_rect.h = 128;
 
     dest_rect.x = x_position;
     dest_rect.y = y_position;
