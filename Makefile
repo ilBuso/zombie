@@ -34,6 +34,8 @@ endif
 # Output executable
 EXECUTABLE := zombie
 
+all: check build run
+
 build:
 	@echo " - Starting Build"
 	@mkdir -p $(OBJ_DIR)
@@ -43,6 +45,10 @@ build:
 	progress="[..................................................]"; \
 	for file in $$(find $(SRC_DIR) -name '*.cpp'); do \
 		g++ -Wall -c $$file -o $(OBJ_DIR)/$$(basename $$file .cpp).o; \
+		if [ $$? -ne 0 ]; then \
+			echo "Error building $$file"; \
+			exit 1; \
+		fi; \
 		completed_files=$$(($$completed_files + 1)); \
 		percentage=$$(($$completed_files * 100 / $$total_files)); \
 		bar_length=$$(($$percentage * 50 / 100)); \
@@ -61,6 +67,10 @@ build:
 		printf " - Building       %s %3d%%\r" "$$progress" $$percentage; \
 	done; \
 	g++ -Wall $(OBJ_DIR)/*.o -o $(EXECUTABLE) $(LIBS); \
+	if [ $$? -ne 0 ]; then \
+		echo "Error linking objects"; \
+		exit 1; \
+	fi; \
 	duration=$$SECONDS; \
 	echo -e "\n - Build completed successfully in $$duration seconds"
 
@@ -73,6 +83,10 @@ check:
 	progress="[..................................................]"; \
 	for file in $(SRCS); do \
 		clang-format --style=file -i $$file >/dev/null 2>&1; \
+		if [ $$? -ne 0 ]; then \
+			echo "Error formatting $$file"; \
+			exit 1; \
+		fi; \
 		completed_files=$$(($$completed_files + 1)); \
 		percentage=$$(($$completed_files * 100 / $$total_files)); \
 		bar_length=$$(($$percentage * 50 / 100)); \
