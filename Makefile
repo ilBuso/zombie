@@ -42,7 +42,7 @@ build:
 	completed_files=0; \
 	progress="[..................................................]"; \
 	for file in $$(find $(SRC_DIR) -name '*.cpp'); do \
-		g++ -Wall -c $$file -o $(OBJ_DIR)/$$(basename $$file .cpp).o >/dev/null 2>&1; \
+		g++ -Wall -c $$file -o $(OBJ_DIR)/$$(basename $$file .cpp).o; \
 		completed_files=$$(($$completed_files + 1)); \
 		percentage=$$(($$completed_files * 100 / $$total_files)); \
 		bar_length=$$(($$percentage * 50 / 100)); \
@@ -60,9 +60,10 @@ build:
 		progress="$${progress}]"; \
 		printf " - Building       %s %3d%%\r" "$$progress" $$percentage; \
 	done; \
-	g++ -Wall $(OBJ_DIR)/*.o -o $(EXECUTABLE) $(LIBS) >/dev/null 2>&1; \
+	g++ -Wall $(OBJ_DIR)/*.o -o $(EXECUTABLE) $(LIBS); \
 	duration=$$SECONDS; \
 	echo -e "\n - Build completed successfully in $$duration seconds"
+
 
 check:
 	@echo " - Checking Code Formatting"
