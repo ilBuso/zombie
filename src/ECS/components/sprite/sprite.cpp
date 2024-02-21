@@ -3,8 +3,6 @@
 
 Sprite::Sprite(const char* file_path) {
     set_texture(file_path);
-
-    std::cout << "Sprite setted " << file_path << std::endl;
 }
 
 void Sprite::init() {
@@ -13,13 +11,13 @@ void Sprite::init() {
     src_rect.x = src_rect.y = 0;
     dest_rect.x = dest_rect.y = 0;
 
-    src_rect.h = src_rect.y = 128;
+    src_rect.w = src_rect.h = 128;
     dest_rect.w = dest_rect.h = 32;
 }
 
 void Sprite::update() {
-    dest_rect.x = transform->x();
-    dest_rect.y = transform->y();
+    dest_rect.x = (int)transform->position.x;
+    dest_rect.y = (int)transform->position.y;
 }
 
 void Sprite::draw() {

@@ -4,24 +4,17 @@
         #include "../../../main.hpp"
 
         #include "../../ECS.hpp"
+        #include "../../../vector2d/vector2d.hpp"
 
         class Transform : public Component {
             private:
-                float x_position;
-                float y_position; 
 
             public:
+                Vector2D position;
+
                 Transform();
                 Transform(float x, float y); 
 
-                float x();
-                float y();
-
-                void init() override;
                 void update() override;
-                void draw() override;
-
-                void set_position(float x, float y);
-
         };
 #endif

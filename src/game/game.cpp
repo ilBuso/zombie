@@ -3,6 +3,7 @@
 #include "../ECS/components/components.hpp"
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
+#include "../vector2d/vector2d.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -82,8 +83,16 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    manager.refresh();
+    delta_time.y = delta_time.x =
+        ((float)SDL_GetTicks() - last_frame_time) / 1000.0f;
+    last_frame_time = (float)SDL_GetTicks();
+
+    // manager.refresh();
     manager.update();
+
+    // Update player position using delta_time
+    player.get_component<Transform>().position.add(
+        Vector2D(25, 25).mult(delta_time));
 }
 
 void Game::render() {
