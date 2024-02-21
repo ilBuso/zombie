@@ -49,15 +49,15 @@ build:
 		progress="["; \
 		i=0; \
 		while [ $$i -lt $$bar_length ]; do \
-			progress+="="; \
-			i=$$(($$i + 1)); \
+			progress="$${progress}="; \
+			i=$$((i + 1)); \
 		done; \
 		i=$$bar_length; \
 		while [ $$i -lt 50 ]; do \
-			progress+="."; \
-			i=$$(($$i + 1)); \
+			progress="$${progress}."; \
+			i=$$((i + 1)); \
 		done; \
-		progress+="]"; \
+		progress="$${progress}]"; \
 		printf " - Building       %s %3d%%\r" "$$progress" $$percentage; \
 	done; \
 	g++ -Wall $(OBJ_DIR)/*.o -o $(EXECUTABLE) $(LIBS) >/dev/null 2>&1; \
@@ -78,16 +78,16 @@ check:
 		progress="["; \
 		i=0; \
 		while [ $$i -lt $$bar_length ]; do \
-			progress+="="; \
-			i=$$(($$i + 1)); \
+			progress="$${progress}="; \
+			i=$$((i + 1)); \
 		done; \
 		i=$$bar_length; \
 		while [ $$i -lt 50 ]; do \
-			progress+="."; \
-			i=$$(($$i + 1)); \
+			progress="$${progress}."; \
+			i=$$((i + 1)); \
 		done; \
-		progress+="]"; \
-		printf " - Checking        %s %3d%%\r" "$$progress" $$percentage; \
+		progress="$${progress}]"; \
+		printf " - Checking       %s %3d%%\r" "$$progress" $$percentage; \
 	done; \
 	duration=$$SECONDS; \
 	echo -e "\n - Check completed successfully in $$duration seconds"
