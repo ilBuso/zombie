@@ -1,22 +1,12 @@
 #include "ECS.hpp"
-#include <memory>
-#include <utility>
-
-inline component_type_id get_component_type_id() {
-    static component_type_id last_id = 0;
-    return last_id++;
-}
-
-template <typename T>
-inline component_type_id get_component_id() noexcept {
-    static component_type_id type_id = get_component_type_id();
-    return type_id;
-}
 
 void Entity::update() {
     for (auto& c : components) {
         c->update();
     }
+}
+
+void Entity::draw() {
     for (auto& c : components) {
         c->draw();
     }
@@ -30,27 +20,27 @@ void Entity::destroy() {
     active = false;
 }
 
-template <typename T>
-bool Entity::has_components() const {
-    return component_bitset[get_component_id<T>];
+void Manager::update() {
+    for (auto& e : entities) {
+        e->update();
+    }
 }
 
-template <typename T, typename... T_args>
-T& Entity::add_component(T_args&&... m_args) {
-    T* c(new T(std::forward<T_args>(m_args)...));
-    c->entity = this;
-    std::unique_ptr<Component> u_ptr{c};
-    components.emplace_back(std::move(u_ptr));
-
-    component_array[get_component_type_id<T>()] = c;
-    component_bitset[get_component_type_id<T>()] = true;
-
-    c->init();
-    return c;
+void Manager::draw() {
+    for (auto& e : entities) {
+        e->draw();
+    }
 }
 
-template <typename T>
-T& Entity::get_component() const {
-    auto ptr(component_array[get_component_type_id<T>()]);
-    return *static_cast<T*>(ptr);
+void Manager::refresh() {
+    entities.erase(std::remove_if(entities.begin(), entities.end(),
+                                  [](const std::unique_ptr<Entity>& entity) {
+                                      return !entity->is_active();
+                                  }),
+                   entities.end());
+}
+
+Entity& Manager::add_entity() {
+    entities.emplace_back(std::make_unique<Entity>());
+    return *entities.back();
 }

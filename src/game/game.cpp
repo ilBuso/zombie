@@ -1,12 +1,15 @@
 #include "game.hpp"
-#include "../gameobject/gameobject.hpp"
+#include "../ECS/ECS.hpp"
+#include "../ECS/components/components.hpp"
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 
+Manager manager;
+auto& player(manager.add_entity());
+
 Map* map;
-GameObject* player;
 
 // Constructor
 Game::Game() {}
@@ -60,7 +63,9 @@ void Game::kill() {
 
 void Game::setup() {
     map = new Map();
-    player = new GameObject("assets/player.png");
+
+    player.add_component<Transform>();
+    player.add_component<Sprite>("assets/player.png");
 }
 
 void Game::handle_events() {
@@ -77,14 +82,15 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    player->update();
+    manager.refresh();
+    manager.update();
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
 
     map->draw_map();
-    player->render();
+    manager.draw();
 
     SDL_RenderPresent(renderer);
 }

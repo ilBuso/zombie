@@ -24,7 +24,6 @@ void Sprite::update() {
 
 void Sprite::draw() {
     TextureManager::draw(texture, src_rect, dest_rect);
-    std::cout << "yeeesss " << std::endl;
 }
 
 void Sprite::set_texture(const char* file_path) {
