@@ -6,6 +6,9 @@
 #include "../vector2d/vector2d.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
+
+Time d_time;
 
 Manager manager;
 auto& player(manager.add_entity());
@@ -65,12 +68,13 @@ void Game::kill() {
 void Game::setup() {
     map = new Map();
 
+    player.add_component<Time>();
     player.add_component<Transform>();
     player.add_component<Sprite>("assets/player.png");
+    player.add_component<KeyboardController>();
 }
 
 void Game::handle_events() {
-    SDL_Event event;
     SDL_PollEvent(&event);
 
     switch (event.type) {
@@ -83,16 +87,8 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    delta_time.y = delta_time.x =
-        ((float)SDL_GetTicks() - last_frame_time) / 1000.0f;
-    last_frame_time = (float)SDL_GetTicks();
-
     // manager.refresh();
     manager.update();
-
-    // Update player position using delta_time
-    player.get_component<Transform>().position.add(
-        Vector2D(25, 25).mult(delta_time));
 }
 
 void Game::render() {

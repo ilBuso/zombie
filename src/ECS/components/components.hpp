@@ -4,6 +4,8 @@
         #include "../../main.hpp"
 
         #include "./transform/transform.hpp"
+        #include "./time/time.hpp"
         #include "./sprite/sprite.hpp"
+        #include "./keyboardcontroller/keyboardcontroller.hpp"
 
 #endif

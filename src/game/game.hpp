@@ -8,11 +8,10 @@
             private:
                 bool is_running = false;
                 SDL_Window* window = nullptr;
-                float last_frame_time = 0.0f;
 
             public:
-                Vector2D delta_time = Vector2D();
                 static SDL_Renderer* renderer;
+                static SDL_Event event;
 
                 Game();     // Constructor
                 ~Game();    // Destructor
