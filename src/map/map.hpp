@@ -7,9 +7,8 @@
         private:
             SDL_Rect src_rect, dest_rect;
 
-            SDL_Texture* grass;
-            SDL_Texture* dirt;
-            SDL_Texture* water;
+            SDL_Texture* ground;
+            SDL_Texture* wall;
             SDL_Texture* unknown;
 
             int map[MAP_HEIGHT][MAP_WIDTH];

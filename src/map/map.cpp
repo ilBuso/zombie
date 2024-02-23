@@ -4,23 +4,22 @@
 
 // clang-format off
 int lvl1[MAP_HEIGHT][MAP_WIDTH] = {
-    {0, 1, 2, 3, 0, 0, 0, 0, 0, 0},
-    {0, 1, 2, 3, 0, 0, 0, 0, 0, 0},
+    {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 2, 2, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
 // clang-format on
 
 Map::Map() {
-    grass = TextureManager::load_texture("assets/tiles/grass.png");
-    dirt = TextureManager::load_texture("assets/tiles/dirt.png");
-    water = TextureManager::load_texture("assets/tiles/water.png");
+    ground = TextureManager::load_texture("assets/tiles/ground.png");
+    wall = TextureManager::load_texture("assets/tiles/wall.png");
     unknown = TextureManager::load_texture("assets/tiles/unknown.png");
 
     load_map(lvl1);
@@ -33,9 +32,8 @@ Map::Map() {
 }
 
 Map::~Map() {
-    SDL_DestroyTexture(grass);
-    SDL_DestroyTexture(dirt);
-    SDL_DestroyTexture(water);
+    SDL_DestroyTexture(ground);
+    SDL_DestroyTexture(wall);
     SDL_DestroyTexture(unknown);
 }
 
@@ -59,13 +57,10 @@ void Map::draw_map() {
 
             switch (type) {
                 case 0:
-                    TextureManager::draw(water, src_rect, dest_rect);
+                    TextureManager::draw(ground, src_rect, dest_rect);
                     break;
                 case 1:
-                    TextureManager::draw(dirt, src_rect, dest_rect);
-                    break;
-                case 2:
-                    TextureManager::draw(grass, src_rect, dest_rect);
+                    TextureManager::draw(wall, src_rect, dest_rect);
                     break;
                 default:
                     TextureManager::draw(unknown, src_rect, dest_rect);
