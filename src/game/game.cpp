@@ -1,9 +1,11 @@
 #include "game.hpp"
 #include "../ECS/ECS.hpp"
 #include "../ECS/components/components.hpp"
+#include "../collision/collision.hpp"
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 #include "../vector2d/vector2d.hpp"
+#include <iostream>
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -12,6 +14,7 @@ Time d_time;
 
 Manager manager;
 auto& player(manager.add_entity());
+auto& wall(manager.add_entity());
 
 Map* map;
 
@@ -70,8 +73,13 @@ void Game::setup() {
 
     player.add_component<Time>();
     player.add_component<Transform>();
-    player.add_component<Sprite>("assets/player.png");
+    player.add_component<Collider>("player");
     player.add_component<KeyboardController>();
+    player.add_component<Sprite>("assets/player.png");
+
+    wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);
+    wall.add_component<Collider>("wall");
+    wall.add_component<Sprite>("assets/tiles/wall.png");
 }
 
 void Game::handle_events() {
@@ -87,8 +95,13 @@ void Game::handle_events() {
 }
 
 void Game::update() {
-    // manager.refresh();
+    manager.refresh();
     manager.update();
+
+    if (Collision::AABB(player.get_component<Collider>().collider,
+                        wall.get_component<Collider>().collider)) {
+        std::cout << "bum - ";
+    }
 }
 
 void Game::render() {

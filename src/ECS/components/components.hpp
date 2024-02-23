@@ -4,6 +4,7 @@
         #include "../../main.hpp"
 
         #include "./transform/transform.hpp"
+        #include "./collider/collider.hpp"
         #include "./time/time.hpp"
         #include "./sprite/sprite.hpp"
         #include "./keyboardcontroller/keyboardcontroller.hpp"

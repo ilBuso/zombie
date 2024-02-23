@@ -5,6 +5,7 @@
 
         #include "../../ECS.hpp"
         #include "../transform/transform.hpp"
+        #include "../../../texturemanager/texturemanager.hpp"
  
         class Sprite : public Component {
             private:
@@ -15,6 +16,8 @@
             public:
                 Sprite() = default;
                 Sprite(const char* file_path);
+                ~Sprite();
+
 
                 void init() override;
                 void update() override;

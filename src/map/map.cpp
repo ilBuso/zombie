@@ -1,5 +1,6 @@
 #include "map.hpp"
 #include "../texturemanager/texturemanager.hpp"
+#include <SDL2/SDL_render.h>
 
 // clang-format off
 int lvl1[MAP_HEIGHT][MAP_WIDTH] = {
@@ -31,7 +32,12 @@ Map::Map() {
     dest_rect.w = dest_rect.h = 32;
 }
 
-Map::~Map() {}
+Map::~Map() {
+    SDL_DestroyTexture(grass);
+    SDL_DestroyTexture(dirt);
+    SDL_DestroyTexture(water);
+    SDL_DestroyTexture(unknown);
+}
 
 void Map::load_map(int array[MAP_HEIGHT][MAP_WIDTH]) {
     for (int row = 0; row < MAP_HEIGHT; row++) {

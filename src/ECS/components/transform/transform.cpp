@@ -1,10 +1,7 @@
 #include "transform.hpp"
-#include <iostream>
-#include <ostream>
 
 Transform::Transform() {
-    position.x = 0;
-    position.y = 0;
+    position.zero();
 }
 
 Transform::Transform(float x, float y) {
@@ -12,17 +9,30 @@ Transform::Transform(float x, float y) {
     position.y = y;
 }
 
-void Transform::init() {
-    velocity.x = 0;
-    velocity.y = 0;
+Transform::Transform(float x, float y, float width, float height, float scale) {
+    position.x = x;
+    position.y = y;
 
-    time = &entity->get_component<Time>();
+    this->width = width;
+    this->height = height;
+
+    this->scale = scale;
+}
+
+void Transform::init() {
+    velocity.zero();
+
+    if (entity->has_components<Time>()) {
+        time = &entity->get_component<Time>();
+    }
 }
 
 void Transform::update() {
-    normalize_velocity();
-    position.x += velocity.x * speed * time->delta_time;
-    position.y += velocity.y * speed * time->delta_time;
+    if (entity->has_components<Time>()) {
+        normalize_velocity();
+        position.x += velocity.x * speed * time->delta_time;
+        position.y += velocity.y * speed * time->delta_time;
+    }
 }
 
 void Transform::normalize_velocity() {

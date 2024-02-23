@@ -10,7 +10,7 @@
             float last_frame_time = 0.0f;
 
         public:
-            float delta_time;
+            float delta_time = 1.0f;
 
             void update() override;
     };
