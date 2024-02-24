@@ -5,10 +5,11 @@
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 #include "../vector2d/vector2d.hpp"
-#include <iostream>
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+
+std::vector<Collider*> Game::colliders;
 
 Time d_time;
 
@@ -16,7 +17,9 @@ Manager manager;
 auto& player(manager.add_entity());
 auto& wall(manager.add_entity());
 
-Map* map;
+auto& tile0(manager.add_entity());
+auto& tile1(manager.add_entity());
+auto& tile2(manager.add_entity());
 
 // Constructor
 Game::Game() {}
@@ -69,7 +72,10 @@ void Game::kill() {
 }
 
 void Game::setup() {
-    map = new Map();
+    tile0.add_component<Tile>(200, 200, 32, 32, 0);
+    tile1.add_component<Tile>(300, 200, 32, 32, 1);
+    tile1.add_component<Collider>("wall");
+    tile2.add_component<Tile>(400, 200, 32, 32, 2);
 
     player.add_component<Time>();
     player.add_component<Transform>();
@@ -98,16 +104,14 @@ void Game::update() {
     manager.refresh();
     manager.update();
 
-    if (Collision::AABB(player.get_component<Collider>().collider,
-                        wall.get_component<Collider>().collider)) {
-        std::cout << "bum - ";
+    for (auto cc : colliders) {
+        Collision::AABB(player.get_component<Collider>(), *cc);
     }
 }
 
 void Game::render() {
     SDL_RenderClear(renderer);
 
-    map->draw_map();
     manager.draw();
 
     SDL_RenderPresent(renderer);

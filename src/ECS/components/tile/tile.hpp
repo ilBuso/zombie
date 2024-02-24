@@ -14,7 +14,13 @@
                 Transform* transform;
                 Sprite* sprite;
 
+                SDL_Rect tile_rect;
+                int tile_id;
+                char* file_path;
+
                 Tile() = default;
                 Tile(float x, float y, float width, float height, int id); 
+
+                void init() override;
         };
 #endif

@@ -1,4 +1,5 @@
 #include "collider.hpp"
+#include "../../../game/game.hpp"
 
 Collider::Collider(std::string tag) {
     this->tag = tag;
@@ -9,6 +10,8 @@ void Collider::init() {
        entity->add_component<Transform>(); 
     }
     transform = &entity->get_component<Transform>();
+
+    Game::colliders.push_back(this);
 }
 
 void Collider::update() {

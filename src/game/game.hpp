@@ -4,6 +4,8 @@
         #include "../main.hpp"
         #include "../vector2d/vector2d.hpp"
 
+        class Collider;
+
         class Game {
             private:
                 bool is_running = false;
@@ -12,6 +14,7 @@
             public:
                 static SDL_Renderer* renderer;
                 static SDL_Event event;
+                static std::vector<Collider*> colliders;
 
                 Game();     // Constructor
                 ~Game();    // Destructor

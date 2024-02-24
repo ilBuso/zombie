@@ -9,4 +9,5 @@
         #include "./sprite/sprite.hpp"
         #include "./keyboardcontroller/keyboardcontroller.hpp"
 
+        #include "./tile/tile.hpp"
 #endif
