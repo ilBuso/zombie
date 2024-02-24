@@ -17,10 +17,6 @@ Manager manager;
 auto& player(manager.add_entity());
 auto& wall(manager.add_entity());
 
-auto& tile0(manager.add_entity());
-auto& tile1(manager.add_entity());
-auto& tile2(manager.add_entity());
-
 // Constructor
 Game::Game() {}
 
@@ -72,10 +68,7 @@ void Game::kill() {
 }
 
 void Game::setup() {
-    tile0.add_component<Tile>(200, 200, 32, 32, 0);
-    tile1.add_component<Tile>(300, 200, 32, 32, 1);
-    tile1.add_component<Collider>("wall");
-    tile2.add_component<Tile>(400, 200, 32, 32, 2);
+    Map::load_map("assets/map/16x16.map", 16, 16);
 
     player.add_component<Time>();
     player.add_component<Transform>();
@@ -119,4 +112,9 @@ void Game::render() {
 
 bool Game::running() {
     return is_running;
+}
+
+void Game::add_tile(float x, float y, int id) {
+    auto& tile(manager.add_entity());
+    tile.add_component<Tile>(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, id);
 }

@@ -16,8 +16,8 @@
                 static SDL_Event event;
                 static std::vector<Collider*> colliders;
 
-                Game();     // Constructor
-                ~Game();    // Destructor
+                Game();
+                ~Game();
 
                 /// Functions
                 bool init();
@@ -29,6 +29,8 @@
                 void render();
 
                 bool running();
+
+                static void add_tile(float x, float y, int id);
         };
 
 #endif

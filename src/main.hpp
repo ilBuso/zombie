@@ -2,6 +2,7 @@
     #define MAIN_HPP
 
         #include <iostream>
+        #include <fstream>
         #include <vector>
         #include <memory>
         #include <algorithm>
