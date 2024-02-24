@@ -27,8 +27,8 @@ Map::Map() {
     src_rect.x = src_rect.y = 0;
     dest_rect.x = dest_rect.y = 0;
 
-    src_rect.w = src_rect.h = 128;
-    dest_rect.w = dest_rect.h = 32;
+    src_rect.w = src_rect.h = ASSETS_HEIGHT;
+    dest_rect.w = dest_rect.h = BLOCK_HEIGHT;
 }
 
 Map::~Map() {

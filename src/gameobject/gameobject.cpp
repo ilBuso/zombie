@@ -11,13 +11,13 @@ GameObject::~GameObject() {}
 void GameObject::update() {
     x_position = 0;
     y_position = 0;
-    width = 32;
-    height = 32;
+    width = BLOCK_WIDTH;
+    height = BLOCK_HEIGHT;
 
     src_rect.x = 0;
     src_rect.y = 0;
-    src_rect.w = 128;
-    src_rect.h = 128;
+    src_rect.w = ASSETS_WIDTH;
+    src_rect.h = ASSETS_HEIGHT;
 
     dest_rect.x = x_position;
     dest_rect.y = y_position;

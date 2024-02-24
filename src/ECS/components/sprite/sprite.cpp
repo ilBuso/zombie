@@ -1,5 +1,4 @@
 #include "sprite.hpp"
-#include <SDL2/SDL_render.h>
 
 Sprite::Sprite(const char* file_path) {
     set_texture(file_path);
@@ -13,8 +12,8 @@ void Sprite::init() {
     transform = &entity->get_component<Transform>();
 
     src_rect.x = src_rect.y = 0;
-    src_rect.w = 128;
-    src_rect.h = 128;
+    src_rect.w = ASSETS_WIDTH;
+    src_rect.h = ASSETS_HEIGHT;
 }
 
 void Sprite::update() {

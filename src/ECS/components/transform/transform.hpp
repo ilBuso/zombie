@@ -14,11 +14,11 @@
                 Vector2D position;
                 Vector2D velocity;
 
-                float width = 32;
-                float height = 32;
-                float scale = 1;
+                float width = BLOCK_WIDTH;
+                float height = BLOCK_HEIGHT;
+                float scale = BLOCK_SCALE;
 
-                float speed = 100.0f;
+                float speed = PLAYER_SPEED;
 
                 Time* time;
 

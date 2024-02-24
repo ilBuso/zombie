@@ -24,5 +24,3 @@ int main() {
     // End
     return 0;
 }
-
-// float delta_time = (SDL_GetTicks() - last_frame_time) / 1000.0f

@@ -17,4 +17,16 @@
         // Map
         #define MAP_WIDTH 10
         #define MAP_HEIGHT 10
+
+        // Assets
+        #define ASSETS_WIDTH 128
+        #define ASSETS_HEIGHT 128
+
+        // Block
+        #define BLOCK_WIDTH 32
+        #define BLOCK_HEIGHT 32
+        #define BLOCK_SCALE 1
+
+        // Player
+        #define PLAYER_SPEED 100.0f
 #endif
