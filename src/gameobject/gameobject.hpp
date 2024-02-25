@@ -8,9 +8,9 @@
             private:
                 float x_position;
                 float y_position;
-                float width;
-                float height;
-                float velocity = 0.0f;
+                int width;
+                int height;
+                int velocity = 0;
 
                 SDL_Texture* texture;
                 SDL_Rect src_rect, dest_rect;

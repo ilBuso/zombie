@@ -14,17 +14,17 @@
                 Vector2D position;
                 Vector2D velocity;
 
-                float width = 32;
-                float height = 32;
-                float scale = 1;
+                int width = 32;
+                int height = 32;
+                int scale = 1;
 
-                float speed = PLAYER_SPEED;
+                int speed = 100;
 
                 Time* time;
 
                 Transform();
                 Transform(float x, float y);
-                Transform(float x, float y, float width, float height, float scale);
+                Transform(float x, float y, int width, int height, int scale);
 
                 void init() override;
                 void update() override;

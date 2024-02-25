@@ -16,10 +16,10 @@
 
                 SDL_Rect tile_rect;
                 int tile_id;
-                char* file_path;
+                std::string file_path;
 
                 Tile() = default;
-                Tile(float x, float y, float width, float height, int id); 
+                Tile(float x, float y, int width, int height, int id); 
 
                 void init() override;
         };

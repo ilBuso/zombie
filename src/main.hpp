@@ -8,6 +8,7 @@
         #include <algorithm>
         #include <bitset>
         #include <array>
+        #include <map>
         #include <SDL2/SDL.h>
         #include <SDL2/SDL_image.h>
 

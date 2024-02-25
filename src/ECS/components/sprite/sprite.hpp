@@ -6,6 +6,7 @@
         #include "../../ECS.hpp"
         #include "../transform/transform.hpp"
         #include "../../../texturemanager/texturemanager.hpp"
+        #include "../animation/animation.hpp"
  
         class Sprite : public Component {
             private:
@@ -18,9 +19,14 @@
                 int speed = 100;
 
             public:
+                int animation_index = 0;
+                std::map<std::string, Animation> animations;
+
+                SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
+
                 Sprite() = default;
                 Sprite(const char* file_path);
-                Sprite(const char* file_path, int frames_number, int m_speed);
+                Sprite(const char* file_path, bool is_animated);
                 ~Sprite();
 
 
@@ -29,6 +35,8 @@
                 void draw() override;
 
                 void set_texture(const char* file_path);
+
+                void play_animation(const std::string& nimation_name);
         };
 
 #endif

@@ -79,8 +79,9 @@ void Game::setup() {
     player.add_component<Time>();
     player.add_component<Transform>();
     player.add_component<Collider>("player");
+    player.add_component<Sprite>("assets/animations/player-animations.png",
+                                 true);
     player.add_component<KeyboardController>();
-    player.add_component<Sprite>("assets/player/player-walking.png", 4, 100);
     player.add_group(players_group);
 
     wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);

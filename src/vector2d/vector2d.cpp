@@ -10,35 +10,33 @@ Vector2D::Vector2D(float x, float y) {
     this->y = y;
 }
 
-
 Vector2D& Vector2D::add(const Vector2D& vector) {
     this->x += vector.x;
     this->y += vector.y;
 
-    return  *this;
+    return *this;
 }
 
 Vector2D& Vector2D::sub(const Vector2D& vector) {
     this->x -= vector.x;
     this->y -= vector.y;
 
-    return  *this;
+    return *this;
 }
 
 Vector2D& Vector2D::mult(const Vector2D& vector) {
     this->x *= vector.x;
     this->y *= vector.y;
 
-    return  *this;
+    return *this;
 }
 
 Vector2D& Vector2D::div(const Vector2D& vector) {
     this->x /= vector.x;
     this->y /= vector.y;
 
-    return  *this;
+    return *this;
 }
-
 
 Vector2D& operator+(Vector2D& vec_one, const Vector2D& vec_two) {
     return vec_one.add(vec_two);
@@ -56,7 +54,6 @@ Vector2D& operator/(Vector2D& vec_one, const Vector2D& vec_two) {
     return vec_one.div(vec_two);
 }
 
-
 Vector2D& Vector2D::operator+=(const Vector2D& vector) {
     return this->add(vector);
 }
@@ -72,7 +69,6 @@ Vector2D& Vector2D::operator*=(const Vector2D& vector) {
 Vector2D& Vector2D::operator/=(const Vector2D& vector) {
     return this->div(vector);
 }
-
 
 Vector2D& Vector2D::operator*(const int& i) {
     this->x *= i;

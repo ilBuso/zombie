@@ -2,8 +2,6 @@
     #define ECS_HPP
 
         #include "../main.hpp"
-#include <array>
-#include <vector>
 
         class Component;
         class Entity;

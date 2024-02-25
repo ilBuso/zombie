@@ -9,7 +9,7 @@ Transform::Transform(float x, float y) {
     position.y = y;
 }
 
-Transform::Transform(float x, float y, float width, float height, float scale) {
+Transform::Transform(float x, float y, int width, int height, int scale) {
     position.x = x;
     position.y = y;
 

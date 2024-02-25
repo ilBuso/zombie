@@ -1,14 +1,21 @@
 # Folders
-SRC_DIR            := ./src
-GAME_DIR           := $(SRC_DIR)/game
-MAP_DIR            := $(SRC_DIR)/map
-GAMEOBJECT_DIR     := $(SRC_DIR)/gameobject
-TEXTUREMANAGER_DIR := $(SRC_DIR)/texturemanager
-ECS_DIR            := $(SRC_DIR)/ECS
-COMPONENTS_DIR     := $(ECS_DIR)/components
-TRANSFORM_DIR      := $(COMPONENTS_DIR)/transform
-SPRITE_DIR         := $(COMPONENTS_DIR)/sprite
-OBJ_DIR            := ./obj
+SRC_DIR            		:= ./src
+GAME_DIR           		:= $(SRC_DIR)/game
+MAP_DIR            		:= $(SRC_DIR)/map
+GAMEOBJECT_DIR     		:= $(SRC_DIR)/gameobject
+TEXTUREMANAGER_DIR 		:= $(SRC_DIR)/texturemanager
+COLLISION_DIR           := $(SRC_DIR)/collision
+VECTOR2D_DIR            := $(SRC_DIR)/vector2d
+ECS_DIR            		:= $(SRC_DIR)/ECS
+COMPONENTS_DIR     		:= $(ECS_DIR)/components
+TRANSFORM_DIR      		:= $(COMPONENTS_DIR)/transform
+SPRITE_DIR         		:= $(COMPONENTS_DIR)/sprite
+COLLIDER_DIR         	:= $(COMPONENTS_DIR)/collider
+KEYBOARDCONTROLLER_DIR  := $(COMPONENTS_DIR)/keyboardcontroller
+TILE_DIR         	    := $(COMPONENTS_DIR)/tile
+TIME_DIR         		:= $(COMPONENTS_DIR)/time
+ANIMATIONS_DIR         	:= $(COMPONENTS_DIR)/animations
+OBJ_DIR            		:= ./obj
 
 # Source files
 SRCS := \
@@ -17,9 +24,17 @@ SRCS := \
     $(wildcard $(MAP_DIR)/*.cpp) \
     $(wildcard $(GAMEOBJECT_DIR)/*.cpp) \
     $(wildcard $(TEXTUREMANAGER_DIR)/*.cpp) \
+    $(wildcard $(COLLISION_DIR)/*.cpp) \
+    $(wildcard $(VECTOR2D_DIR)/*.cpp) \
     $(wildcard $(ECS_DIR)/*.cpp) \
     $(wildcard $(COMPONENTS_DIR)/*.cpp) \
     $(wildcard $(TRANSFORM_DIR)/*.cpp) \
+    $(wildcard $(SPRITE_DIR)/*.cpp) \
+    $(wildcard $(COLLIDER_DIR)/*.cpp) \
+    $(wildcard $(KEYBOARDCONTROLLER_DIR)/*.cpp) \
+    $(wildcard $(TILE_DIR)/*.cpp) \
+    $(wildcard $(TIME_DIR)/*.cpp) \
+    $(wildcard $(ANIMATIONS_DIR)/*.cpp) \
     $(wildcard $(SPRITE_DIR)/*.cpp)
 
 # Libraries and flags

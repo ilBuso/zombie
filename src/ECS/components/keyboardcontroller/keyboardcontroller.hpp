@@ -7,6 +7,7 @@
         #include "../../ECS.hpp"
 
         #include "../transform/transform.hpp"
+        #include "../sprite/sprite.hpp"
 
         class KeyboardController : public Component {
             private:
@@ -14,6 +15,7 @@
                 
             public:
                 Transform* transform;
+                Sprite* sprite;
 
                 void init() override;
                 void update() override;

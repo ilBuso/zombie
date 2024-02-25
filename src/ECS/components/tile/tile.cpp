@@ -1,6 +1,6 @@
 #include "tile.hpp"
 
-Tile::Tile(float x, float y, float width, float height, int id) {
+Tile::Tile(float x, float y, int width, int height, int id) {
     tile_rect.x = x;
     tile_rect.y = y;
     tile_rect.w = width;
@@ -22,9 +22,10 @@ Tile::Tile(float x, float y, float width, float height, int id) {
 }
 
 void Tile::init() {
-    entity->add_component<Transform>(tile_rect.x, tile_rect.y, tile_rect.w, tile_rect.h, 1);
+    entity->add_component<Transform>(tile_rect.x, tile_rect.y, tile_rect.w,
+                                     tile_rect.h, 1);
     transform = &entity->get_component<Transform>();
 
-    entity->add_component<Sprite>(file_path);
+    entity->add_component<Sprite>(file_path.c_str());
     sprite = &entity->get_component<Sprite>();
 }
