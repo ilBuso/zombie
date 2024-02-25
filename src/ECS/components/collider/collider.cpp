@@ -6,7 +6,7 @@ Collider::Collider(std::string tag) {
 }
 
 void Collider::init() {
-    if (!entity->has_components<Transform>()){
+    if (!entity->has_component<Transform>()){
        entity->add_component<Transform>(); 
     }
     transform = &entity->get_component<Transform>();
