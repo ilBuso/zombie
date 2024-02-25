@@ -1,3 +1,5 @@
-./zombie
+# Ignore zombie file
+zombie
 
-./obj
+# Ignore obj folder
+obj/
