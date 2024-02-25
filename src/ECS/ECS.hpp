@@ -2,28 +2,33 @@
     #define ECS_HPP
 
         #include "../main.hpp"
+#include <array>
+#include <vector>
 
         class Component;
         class Entity;
         class Manager;
 
-        using component_type_id = std::size_t;
+        using Component_type_id = std::size_t;
+        using Group = std::size_t;
 
-        inline component_type_id get_component_type_id() {
-            static component_type_id last_id = 0;
+        inline Component_type_id get_new_component_type_id() {
+            static Component_type_id last_id = 0u;
             return last_id++;
         }
 
         template <typename T>
-        inline component_type_id get_component_id() noexcept {
-            static component_type_id type_id = get_component_type_id();
+        inline Component_type_id get_component_id() noexcept {
+            static Component_type_id type_id = get_new_component_type_id();
             return type_id;
         }
 
         constexpr std::size_t max_components = 32;
+        constexpr std::size_t max_groups = 32;
 
         using Component_bitset = std::bitset<max_components>;
         using Component_array = std::array<Component*, max_components>;
+        using Group_bitset = std::bitset<max_groups>;
 
         class Component {
             private:
@@ -40,19 +45,23 @@
 
         class Entity {
             private:
+                Manager& manager;
                 bool active = true;
                 std::vector<std::unique_ptr<Component>> components;
                 Component_array component_array;
                 Component_bitset component_bitset;
+                Group_bitset group_bitset;
 
             public:
+                Entity(Manager& m_manager) : manager(m_manager) {}
+
                 void update();
                 void draw();
                 bool is_active();
                 void destroy();
 
                 template <typename T>
-                bool has_components() const {
+                bool has_component() const {
                     return component_bitset[get_component_id<T>()];
                 }
 
@@ -75,11 +84,17 @@
                     auto ptr = component_array[get_component_id<T>()];
                     return *static_cast<T*>(ptr);
                 }
+
+                bool has_group(Group m_group);
+                void add_group(Group m_group);
+                void del_group(Group m_group);
+
         };
 
         class Manager {
             private:
                 std::vector<std::unique_ptr<Entity>> entities;
+                std::array<std::vector<Entity*>, max_groups> grouped_entities;
 
             public:
                 void update();
@@ -87,6 +102,8 @@
                 void refresh();
 
                 Entity& add_entity();
+                void add_to_group(Entity* m_entity, Group m_group);
+                std::vector<Entity*>& get_group(Group m_group);
         };
 
 #endif

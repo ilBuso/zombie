@@ -17,6 +17,12 @@ Manager manager;
 auto& player(manager.add_entity());
 auto& wall(manager.add_entity());
 
+enum group_lables : std::size_t {
+    map_group,
+    players_group,
+    colliders_group,
+};
+
 // Constructor
 Game::Game() {}
 
@@ -75,10 +81,12 @@ void Game::setup() {
     player.add_component<Collider>("player");
     player.add_component<KeyboardController>();
     player.add_component<Sprite>("assets/player.png");
+    player.add_group(players_group);
 
     wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);
     wall.add_component<Collider>("wall");
     wall.add_component<Sprite>("assets/tiles/wall.png");
+    wall.add_group(map_group);
 }
 
 void Game::handle_events() {
@@ -102,10 +110,19 @@ void Game::update() {
     }
 }
 
+auto& tiles(manager.get_group(map_group));
+auto& players(manager.get_group(players_group));
+
 void Game::render() {
     SDL_RenderClear(renderer);
 
-    manager.draw();
+    for (auto& t : tiles) {
+        t->draw();
+    }
+
+    for (auto& p : players) {
+        p->draw();
+    }
 
     SDL_RenderPresent(renderer);
 }
@@ -117,4 +134,5 @@ bool Game::running() {
 void Game::add_tile(float x, float y, int id) {
     auto& tile(manager.add_entity());
     tile.add_component<Tile>(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, id);
+    tile.add_group(map_group);
 }
