@@ -1,53 +1,27 @@
 #include "keyboardcontroller.hpp"
+#include <SDL2/SDL_events.h>
 
 void KeyboardController::init() {
     transform = &entity->get_component<Transform>();
 }
 
 void KeyboardController::update() {
-    if (Game::event.type == SDL_KEYDOWN) {
-        switch (Game::event.key.keysym.sym) {
-            case SDLK_w:
-                transform->velocity.y = -1;
-                break;
 
-            case SDLK_a:
-                transform->velocity.x = -1;
-                break;
+    keystates = SDL_GetKeyboardState(NULL);
 
-            case SDLK_s:
-                transform->velocity.y = 1;
-                break;
-
-            case SDLK_d:
-                transform->velocity.x = 1;
-                break;
-
-            default:
-                break;
-        }
+    if (keystates[SDL_SCANCODE_W]) {
+        transform->velocity.y = -1;
+    } else if (keystates[SDL_SCANCODE_S]) {
+        transform->velocity.y = 1;
+    } else {
+        transform->velocity.y = 0;
     }
 
-    if(Game::event.type == SDL_KEYUP) {
-        switch (Game::event.key.keysym.sym) {
-            case SDLK_w:
-                transform->velocity.y = 0;
-                break;
-
-            case SDLK_a:
-                transform->velocity.x = 0;
-                break;
-
-            case SDLK_s:
-                transform->velocity.y = 0;
-                break;
-
-            case SDLK_d:
-                transform->velocity.x = 0;
-                break;
-
-            default:
-                break;
-        }
+    if (keystates[SDL_SCANCODE_A]) {
+        transform->velocity.x = -1;
+    } else if (keystates[SDL_SCANCODE_D]) {
+        transform->velocity.x = 1;
+    } else {
+        transform->velocity.x = 0;
     }
 }

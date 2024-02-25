@@ -10,7 +10,8 @@
 
         class KeyboardController : public Component {
             private:
-
+                const Uint8* keystates;
+                
             public:
                 Transform* transform;
 

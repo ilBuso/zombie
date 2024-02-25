@@ -29,16 +29,17 @@ void Transform::init() {
 
 void Transform::update() {
     if (entity->has_component<Time>()) {
-        normalize_velocity();
+        if (velocity.x != 0 && velocity.y != 0) {
+            normalize_velocity();
+        }
+
         position.x += velocity.x * speed * time->delta_time;
         position.y += velocity.y * speed * time->delta_time;
     }
 }
 
 void Transform::normalize_velocity() {
-    if (velocity.x != 0 || velocity.y != 0) {
-        float length = sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
-        velocity.x /= length;
-        velocity.y /= length;
-    }
+    float result = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2));
+    velocity.x /= result;
+    velocity.y /= result;
 }
