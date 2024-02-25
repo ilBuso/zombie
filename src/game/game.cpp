@@ -80,7 +80,7 @@ void Game::setup() {
     player.add_component<Transform>();
     player.add_component<Collider>("player");
     player.add_component<KeyboardController>();
-    player.add_component<Sprite>("assets/player.png");
+    player.add_component<Sprite>("assets/player/player-walking.png", 4, 100);
     player.add_group(players_group);
 
     wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);
@@ -133,6 +133,6 @@ bool Game::running() {
 
 void Game::add_tile(float x, float y, int id) {
     auto& tile(manager.add_entity());
-    tile.add_component<Tile>(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, id);
+    tile.add_component<Tile>(x, y, 32, 32, id);
     tile.add_group(map_group);
 }
