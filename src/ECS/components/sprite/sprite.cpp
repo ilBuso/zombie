@@ -1,7 +1,16 @@
 #include "sprite.hpp"
+#include <SDL2/SDL_timer.h>
 
 Sprite::Sprite(const char* file_path) {
     set_texture(file_path);
+}
+
+Sprite::Sprite(const char* file_path, int frames_number, int m_speed) {
+    animated = true;
+
+    set_texture(file_path);
+    frames = frames_number;
+    speed = m_speed;
 }
 
 Sprite::~Sprite() {
@@ -17,6 +26,11 @@ void Sprite::init() {
 }
 
 void Sprite::update() {
+    if (animated) {
+        src_rect.x =
+            src_rect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+    }
+
     dest_rect.x = static_cast<int>(transform->position.x);
     dest_rect.y = static_cast<int>(transform->position.y);
     dest_rect.w = transform->width * transform->scale;

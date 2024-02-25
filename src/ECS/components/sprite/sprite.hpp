@@ -13,9 +13,14 @@
                 SDL_Texture* texture;
                 SDL_Rect src_rect, dest_rect;
 
+                bool animated = false;
+                int frames = 0;
+                int speed = 100;
+
             public:
                 Sprite() = default;
                 Sprite(const char* file_path);
+                Sprite(const char* file_path, int frames_number, int m_speed);
                 ~Sprite();
 
 
