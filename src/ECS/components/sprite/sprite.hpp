@@ -7,6 +7,7 @@
         #include "../transform/transform.hpp"
         #include "../../../texturemanager/texturemanager.hpp"
         #include "../animation/animation.hpp"
+        #include "../../../game/game.hpp"
  
         class Sprite : public Component {
             private:

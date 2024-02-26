@@ -10,7 +10,8 @@ Transform::Transform(float x, float y) {
 }
 
 Transform::Transform(int scale) {
-    position.zero();
+    position.x = 600;
+    position.y = 600;
     this->scale = scale;
 }
 

@@ -3,18 +3,23 @@
 
         #include "../main.hpp"
         #include "../vector2d/vector2d.hpp"
+        #include "../ECS/components/time/time.hpp"
 
         class Collider;
 
         class Game {
             private:
-                bool is_running = false;
                 SDL_Window* window = nullptr;
 
             public:
                 static SDL_Renderer* renderer;
                 static SDL_Event event;
                 static std::vector<Collider*> colliders;
+                static bool is_running;
+
+                static SDL_Rect camera;
+
+                Time* time;
 
                 Game();
                 ~Game();

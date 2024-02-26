@@ -5,9 +5,11 @@
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 #include "../vector2d/vector2d.hpp"
+#include <iostream>
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 
 std::vector<Collider*> Game::colliders;
 
@@ -17,6 +19,8 @@ Manager manager;
 auto& player(manager.add_entity());
 auto& wall(manager.add_entity());
 
+bool Game::is_running = false;
+
 const char* map_file = "assets/tiles/terrain.png";
 
 enum group_lables : std::size_t {
@@ -24,6 +28,9 @@ enum group_lables : std::size_t {
     players_group,
     colliders_group,
 };
+
+auto& tiles(manager.get_group(map_group));
+auto& players(manager.get_group(players_group));
 
 // Constructor
 Game::Game() {}
@@ -76,7 +83,7 @@ void Game::kill() {
 }
 
 void Game::setup() {
-    Map::load_map("assets/map/16x16.map", 16, 16);
+    Map::load_map("assets/map/16x16.map", 32, 32);
 
     player.add_component<Time>();
     player.add_component<Transform>(3);
@@ -108,13 +115,32 @@ void Game::update() {
     manager.refresh();
     manager.update();
 
-    for (auto cc : colliders) {
-        Collision::AABB(player.get_component<Collider>(), *cc);
-    }
-}
+    Transform player_transform = player.get_component<Transform>();
 
-auto& tiles(manager.get_group(map_group));
-auto& players(manager.get_group(players_group));
+    camera.x = (player_transform.position.x +
+                ((player_transform.width * player_transform.scale) / 2.0f)) -
+               (camera.w / 2.0f);
+    camera.y = (player_transform.position.y +
+                ((player_transform.width * player_transform.scale) / 2.0f)) -
+               (camera.h / 2.0f);
+
+    if (camera.x < 0) {
+        camera.x = 0;
+    }
+    if (camera.y < 0) {
+        camera.y = 0;
+    }
+    if (camera.x > 49 * 32) {
+        camera.x = 49 * 32;
+    }
+    if (camera.y > 49 * 32) {
+        camera.y = 49 * 32;
+    }
+
+    /*for (auto cc : colliders) {
+        Collision::AABB(player.get_component<Collider>(), *cc);
+    }*/
+}
 
 void Game::render() {
     SDL_RenderClear(renderer);

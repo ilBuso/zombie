@@ -9,7 +9,7 @@ Sprite::Sprite(const char* file_path) {
 Sprite::Sprite(const char* file_path, bool is_animated) {
     animated = is_animated;
 
-    Animation idle = Animation(0, 2, 100);
+    Animation idle = Animation(0, 2, 500);
     Animation walk = Animation(1, 4, 100);
 
     animations.emplace("idle", idle);
@@ -40,8 +40,8 @@ void Sprite::update() {
 
     src_rect.y = animation_index * transform->height;
 
-    dest_rect.x = static_cast<int>(transform->position.x);
-    dest_rect.y = static_cast<int>(transform->position.y);
+    dest_rect.x = static_cast<int>(transform->position.x) - Game::camera.x;
+    dest_rect.y = static_cast<int>(transform->position.y) - Game::camera.y;
     dest_rect.w = transform->width * transform->scale;
     dest_rect.h = transform->height * transform->scale;
 }
