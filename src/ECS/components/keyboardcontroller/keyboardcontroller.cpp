@@ -1,4 +1,5 @@
 #include "keyboardcontroller.hpp"
+#include <SDL2/SDL_scancode.h>
 
 void KeyboardController::init() {
     transform = &entity->get_component<Transform>();
@@ -7,6 +8,10 @@ void KeyboardController::init() {
 
 void KeyboardController::update() {
     keystates = SDL_GetKeyboardState(NULL);
+
+    if (keystates[SDL_SCANCODE_ESCAPE]) {
+        Game::is_running = false;
+    }
 
     if (keystates[SDL_SCANCODE_W]) {
         transform->velocity.y = -1;
