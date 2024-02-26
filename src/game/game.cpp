@@ -17,6 +17,8 @@ Manager manager;
 auto& player(manager.add_entity());
 auto& wall(manager.add_entity());
 
+const char* map_file = "assets/tiles/terrain.png";
+
 enum group_lables : std::size_t {
     map_group,
     players_group,
@@ -77,17 +79,17 @@ void Game::setup() {
     Map::load_map("assets/map/16x16.map", 16, 16);
 
     player.add_component<Time>();
-    player.add_component<Transform>();
+    player.add_component<Transform>(3);
     player.add_component<Collider>("player");
     player.add_component<Sprite>("assets/animations/player-animations.png",
                                  true);
     player.add_component<KeyboardController>();
     player.add_group(players_group);
 
-    wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);
+    /*wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);
     wall.add_component<Collider>("wall");
     wall.add_component<Sprite>("assets/tiles/wall.png");
-    wall.add_group(map_group);
+    wall.add_group(map_group);*/
 }
 
 void Game::handle_events() {
@@ -132,8 +134,8 @@ bool Game::running() {
     return is_running;
 }
 
-void Game::add_tile(float x, float y, int id) {
+void Game::add_tile(int src_x, int src_y, int x, int y) {
     auto& tile(manager.add_entity());
-    tile.add_component<Tile>(x, y, 32, 32, id);
+    tile.add_component<Tile>(src_x, src_y, x, y, map_file);
     tile.add_group(map_group);
 }

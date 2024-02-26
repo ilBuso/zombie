@@ -4,23 +4,18 @@
         #include "../../../main.hpp"
 
         #include "../../ECS.hpp"
-        #include "../transform/transform.hpp"
-        #include "../sprite/sprite.hpp"
         
         class Tile : public Component {
             private:
 
             public:
-                Transform* transform;
-                Sprite* sprite;
-
-                SDL_Rect tile_rect;
-                int tile_id;
-                std::string file_path;
+                SDL_Texture* texture;
+                SDL_Rect src_rect, dest_rect;
 
                 Tile() = default;
-                Tile(float x, float y, int width, int height, int id); 
+                ~Tile();
+                Tile(int src_x, int src_y, int x, int y, const char* file_path); 
 
-                void init() override;
+                void draw() override;
         };
 #endif

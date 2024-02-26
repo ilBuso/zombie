@@ -9,6 +9,11 @@ Transform::Transform(float x, float y) {
     position.y = y;
 }
 
+Transform::Transform(int scale) {
+    position.zero();
+    this->scale = scale;
+}
+
 Transform::Transform(float x, float y, int width, int height, int scale) {
     position.x = x;
     position.y = y;

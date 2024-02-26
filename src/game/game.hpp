@@ -30,7 +30,7 @@
 
                 bool running();
 
-                static void add_tile(float x, float y, int id);
+                static void add_tile(int src_x, int src_y, int x, int y);
         };
 
 #endif

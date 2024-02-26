@@ -1,31 +1,22 @@
 #include "tile.hpp"
+#include "../../../texturemanager/texturemanager.hpp"
 
-Tile::Tile(float x, float y, int width, int height, int id) {
-    tile_rect.x = x;
-    tile_rect.y = y;
-    tile_rect.w = width;
-    tile_rect.h = height;
-
-    tile_id = id;
-
-    switch (tile_id) {
-        case 0:
-            file_path = "assets/tiles/ground.png";
-            break;
-        case 1:
-            file_path = "assets/tiles/wall.png";
-            break;
-        default:
-            file_path = "assets/tiles/unknown.png";
-            break;
-    }
+Tile::~Tile() {
+    SDL_DestroyTexture(texture);
 }
 
-void Tile::init() {
-    entity->add_component<Transform>(tile_rect.x, tile_rect.y, tile_rect.w,
-                                     tile_rect.h, 1);
-    transform = &entity->get_component<Transform>();
+Tile::Tile(int src_x, int src_y, int x, int y, const char* file_path) {
+    texture = TextureManager::load_texture(file_path);
 
-    entity->add_component<Sprite>(file_path.c_str());
-    sprite = &entity->get_component<Sprite>();
+    src_rect.x = src_x;
+    src_rect.y = src_y;
+    src_rect.h = src_rect.w = 32;
+
+    dest_rect.x = x;
+    dest_rect.y = y;
+    dest_rect.h = dest_rect.w = 64;
+}
+
+void Tile::draw() {
+    TextureManager::draw(texture, src_rect, dest_rect, SDL_FLIP_NONE);
 }

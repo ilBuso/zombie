@@ -24,6 +24,7 @@
 
                 Transform();
                 Transform(float x, float y);
+                Transform(int scale);
                 Transform(float x, float y, int width, int height, int scale);
 
                 void init() override;
