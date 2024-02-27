@@ -4,7 +4,8 @@
         #include "../main.hpp"
         #include "../vector2d/vector2d.hpp"
         #include "../ECS/components/time/time.hpp"
-
+        #include "../assetmanager/assetmanager.hpp"
+    
         class AssetManager;
         class Collider;
 
