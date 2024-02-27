@@ -7,8 +7,8 @@ Tile::~Tile() {
 }
 
 Tile::Tile(int src_x, int src_y, int x, int y, int size, int scale,
-           const char* file_path) {
-    texture = TextureManager::load_texture(file_path);
+           std::string texture_id) {
+    texture = Game::asset_manager->get_texture(texture_id);
 
     position.x = x;
     position.y = y;

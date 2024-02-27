@@ -5,6 +5,7 @@
         #include "../vector2d/vector2d.hpp"
         #include "../ECS/components/time/time.hpp"
 
+        class AssetManager;
         class Collider;
 
         class Game {
@@ -15,8 +16,8 @@
                 static SDL_Renderer* renderer;
                 static SDL_Event event;
                 static bool is_running;
-
                 static SDL_Rect camera;
+                static AssetManager* asset_manager;
 
                 enum group_lables : std::size_t {
                     map_group,

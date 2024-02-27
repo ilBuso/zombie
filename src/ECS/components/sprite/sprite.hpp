@@ -8,6 +8,7 @@
         #include "../../../texturemanager/texturemanager.hpp"
         #include "../animation/animation.hpp"
         #include "../../../game/game.hpp"
+        #include "../../../assetmanager/assetmanager.hpp"
  
         class Sprite : public Component {
             private:
@@ -26,8 +27,8 @@
                 SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
 
                 Sprite() = default;
-                Sprite(const char* file_path);
-                Sprite(const char* file_path, bool is_animated);
+                Sprite(std::string texture_id);
+                Sprite(std::string texture_id, bool is_animated);
                 ~Sprite();
 
 
@@ -35,9 +36,9 @@
                 void update() override;
                 void draw() override;
 
-                void set_texture(const char* file_path);
+                void set_texture(std::string texture_id);
 
-                void play_animation(const std::string& nimation_name);
+                void play_animation(const std::string& animation_name);
         };
 
 #endif

@@ -17,7 +17,7 @@
 
                 Tile() = default;
                 ~Tile();
-                Tile(int src_x, int src_y, int x, int y, int size, int scale, const char* file_path); 
+                Tile(int src_x, int src_y, int x, int y, int size, int scale, std::string texture_id); 
 
                 void update() override;
                 void draw() override;

@@ -5,14 +5,14 @@
 
     class Map {
         private:
-            const char* file_path;
+            std::string texture_id;
             int scale;
             int tile_size;
 
             int scaled_size;
 
         public:
-            Map(const char* file_path, int scale, int tile_size);
+            Map(std::string texture_id, int scale, int tile_size);
             ~Map();
 
             void add_tile(int src_x, int src_y, int x, int y);

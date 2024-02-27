@@ -5,8 +5,8 @@
 
 extern Manager manager;
 
-Map::Map(const char* file_path, int scale, int tile_size) {
-    this->file_path = file_path;
+Map::Map(std::string texture_id, int scale, int tile_size) {
+    this->texture_id = texture_id;
     this->scale = scale;
     this->tile_size = tile_size;
     scaled_size = tile_size * scale;
@@ -16,7 +16,7 @@ Map::~Map() {}
 
 void Map::add_tile(int src_x, int src_y, int x, int y) {
     auto& tile(manager.add_entity());
-    tile.add_component<Tile>(src_x, src_y, x, y, tile_size, scale, file_path);
+    tile.add_component<Tile>(src_x, src_y, x, y, tile_size, scale, texture_id);
     tile.add_group(Game::map_group);
 }
 

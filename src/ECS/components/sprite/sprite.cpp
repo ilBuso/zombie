@@ -1,12 +1,10 @@
 #include "sprite.hpp"
-#include <iostream>
-#include <ostream>
 
-Sprite::Sprite(const char* file_path) {
-    set_texture(file_path);
+Sprite::Sprite(std::string texture_id) {
+    set_texture(texture_id);
 }
 
-Sprite::Sprite(const char* file_path, bool is_animated) {
+Sprite::Sprite(std::string texture_id, bool is_animated) {
     animated = is_animated;
 
     Animation idle = Animation(0, 2, 500);
@@ -17,11 +15,10 @@ Sprite::Sprite(const char* file_path, bool is_animated) {
 
     play_animation("idle");
 
-    set_texture(file_path);
+    set_texture(texture_id);
 }
 
 Sprite::~Sprite() {
-    SDL_DestroyTexture(texture);
 }
 
 void Sprite::init() {
@@ -50,8 +47,8 @@ void Sprite::draw() {
     TextureManager::draw(texture, src_rect, dest_rect, sprite_flip);
 }
 
-void Sprite::set_texture(const char* file_path) {
-    texture = TextureManager::load_texture(file_path);
+void Sprite::set_texture(std::string texture_id) {
+    texture = Game::asset_manager->get_texture(texture_id);
 }
 
 void Sprite::play_animation(const std::string& animation_name) {

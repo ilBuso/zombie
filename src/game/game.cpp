@@ -5,7 +5,7 @@
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 #include "../vector2d/vector2d.hpp"
-#include <iostream>
+#include "../assetmanager/assetmanager.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -16,6 +16,8 @@ Time d_time;
 Map* map;
 Manager manager;
 auto& player(manager.add_entity());
+
+AssetManager* Game::asset_manager = new AssetManager(&manager);
 
 bool Game::is_running = false;
 
@@ -70,14 +72,17 @@ void Game::kill() {
 }
 
 void Game::setup() {
-    map = new Map("assets/tiles/terrain.png", 2, 32);
+    asset_manager->add_texture("map", "assets/tiles/map.png");
+    asset_manager->add_texture("collider", "assets/tiles/collider.png");
+    asset_manager->add_texture("player", "assets/animations/player.png");
+
+    map = new Map("map", 2, 32);
     map->load_map("assets/map/map.map", 32, 32);
 
     player.add_component<Time>();
     player.add_component<Transform>(3);
     player.add_component<Collider>("player");
-    player.add_component<Sprite>("assets/animations/player-animations.png",
-                                 true);
+    player.add_component<Sprite>("player", true);
     player.add_component<KeyboardController>();
     player.add_group(players_group);
 }
