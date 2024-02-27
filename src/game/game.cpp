@@ -11,26 +11,13 @@ SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = {0, 0, 1550, 1550};
 
-std::vector<Collider*> Game::colliders;
-
 Time d_time;
 
+Map* map;
 Manager manager;
 auto& player(manager.add_entity());
-auto& wall(manager.add_entity());
 
 bool Game::is_running = false;
-
-const char* map_file = "assets/tiles/terrain.png";
-
-enum group_lables : std::size_t {
-    map_group,
-    players_group,
-    colliders_group,
-};
-
-auto& tiles(manager.get_group(map_group));
-auto& players(manager.get_group(players_group));
 
 // Constructor
 Game::Game() {}
@@ -83,7 +70,8 @@ void Game::kill() {
 }
 
 void Game::setup() {
-    Map::load_map("assets/map/16x16.map", 32, 32);
+    map = new Map("assets/tiles/terrain.png", 2, 32);
+    map->load_map("assets/map/map.map", 32, 32);
 
     player.add_component<Time>();
     player.add_component<Transform>(3);
@@ -92,12 +80,11 @@ void Game::setup() {
                                  true);
     player.add_component<KeyboardController>();
     player.add_group(players_group);
-
-    /*wall.add_component<Transform>(50.0f, 50.0f, 100.0f, 30.0f, 1.0f);
-    wall.add_component<Collider>("wall");
-    wall.add_component<Sprite>("assets/tiles/wall.png");
-    wall.add_group(map_group);*/
 }
+
+auto& tiles(manager.get_group(Game::map_group));
+auto& players(manager.get_group(Game::players_group));
+auto& colliders(manager.get_group(Game::colliders_group));
 
 void Game::handle_events() {
     SDL_PollEvent(&event);
@@ -112,8 +99,19 @@ void Game::handle_events() {
 }
 
 void Game::update() {
+
+    SDL_Rect player_collider = player.get_component<Collider>().collider;
+    Vector2D player_position = player.get_component<Transform>().position;
+
     manager.refresh();
     manager.update();
+
+    for (auto& c : colliders) {
+        SDL_Rect c_collider = c->get_component<Collider>().collider;
+        if (Collision::AABB(c_collider, player_collider)) {
+            player.get_component<Transform>().position = player_position;
+        }
+    }
 
     Transform player_transform = player.get_component<Transform>();
 
@@ -136,10 +134,6 @@ void Game::update() {
     if (camera.y > camera.h) {
         camera.y = camera.h;
     }
-
-    /*for (auto cc : colliders) {
-        Collision::AABB(player.get_component<Collider>(), *cc);
-    }*/
 }
 
 void Game::render() {
@@ -153,15 +147,13 @@ void Game::render() {
         p->draw();
     }
 
+    for (auto& c : colliders) {
+        c->draw();
+    }
+
     SDL_RenderPresent(renderer);
 }
 
 bool Game::running() {
     return is_running;
-}
-
-void Game::add_tile(int src_x, int src_y, int x, int y) {
-    auto& tile(manager.add_entity());
-    tile.add_component<Tile>(src_x, src_y, x, y, map_file);
-    tile.add_group(map_group);
 }

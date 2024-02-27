@@ -5,12 +5,18 @@
 
     class Map {
         private:
+            const char* file_path;
+            int scale;
+            int tile_size;
+
+            int scaled_size;
 
         public:
-            Map();
+            Map(const char* file_path, int scale, int tile_size);
             ~Map();
 
-            static void load_map(std::string file_path, int x, int y);
+            void add_tile(int src_x, int src_y, int x, int y);
+            void load_map(std::string file_path, int x, int y);
     };
             
 #endif

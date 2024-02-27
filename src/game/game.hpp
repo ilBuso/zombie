@@ -14,10 +14,15 @@
             public:
                 static SDL_Renderer* renderer;
                 static SDL_Event event;
-                static std::vector<Collider*> colliders;
                 static bool is_running;
 
                 static SDL_Rect camera;
+
+                enum group_lables : std::size_t {
+                    map_group,
+                    players_group,
+                    colliders_group,
+                };
 
                 Time* time;
 
@@ -34,8 +39,6 @@
                 void render();
 
                 bool running();
-
-                static void add_tile(int src_x, int src_y, int x, int y);
         };
 
 #endif

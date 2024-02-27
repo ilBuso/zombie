@@ -6,7 +6,8 @@ Tile::~Tile() {
     SDL_DestroyTexture(texture);
 }
 
-Tile::Tile(int src_x, int src_y, int x, int y, const char* file_path) {
+Tile::Tile(int src_x, int src_y, int x, int y, int size, int scale,
+           const char* file_path) {
     texture = TextureManager::load_texture(file_path);
 
     position.x = x;
@@ -14,11 +15,11 @@ Tile::Tile(int src_x, int src_y, int x, int y, const char* file_path) {
 
     src_rect.x = src_x;
     src_rect.y = src_y;
-    src_rect.h = src_rect.w = 32;
+    src_rect.h = src_rect.w = size;
 
     dest_rect.x = x;
     dest_rect.y = y;
-    dest_rect.h = dest_rect.w = 64;
+    dest_rect.h = dest_rect.w = size * scale;
 }
 
 void Tile::update() {
