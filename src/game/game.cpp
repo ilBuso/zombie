@@ -9,7 +9,7 @@
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
-SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+SDL_Rect Game::camera = {0, 0, 1550, 1550};
 
 std::vector<Collider*> Game::colliders;
 
@@ -119,10 +119,10 @@ void Game::update() {
 
     camera.x = (player_transform.position.x +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -
-               (camera.w / 2.0f);
+               (WINDOW_WIDTH / 2.0f);
     camera.y = (player_transform.position.y +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -
-               (camera.h / 2.0f);
+               (WINDOW_HEIGHT / 2.0f);
 
     if (camera.x < 0) {
         camera.x = 0;
@@ -130,11 +130,11 @@ void Game::update() {
     if (camera.y < 0) {
         camera.y = 0;
     }
-    if (camera.x > 49 * 32) {
-        camera.x = 49 * 32;
+    if (camera.x > camera.w) {
+        camera.x = camera.w;
     }
-    if (camera.y > 49 * 32) {
-        camera.y = 49 * 32;
+    if (camera.y > camera.h) {
+        camera.y = camera.h;
     }
 
     /*for (auto cc : colliders) {
