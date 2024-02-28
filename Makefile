@@ -86,7 +86,7 @@ link:
 
 check:
 	@echo "Formatting"
-	@for file in $(SRCS); do \
+	@for file in $(SRCS) $(HDRS); do \
 		clang-format --style=file -i $$file; \
 		if [ $$? -ne 0 ]; then \
 			echo "ERROR formatting $$file"; \
