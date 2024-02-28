@@ -6,7 +6,6 @@
 #include <SDL2/SDL_render.h>
 
 class TextureManager {
-
   private:
   public:
     static SDL_Texture* load_texture(const char* file_path);

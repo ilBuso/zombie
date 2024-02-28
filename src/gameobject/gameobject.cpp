@@ -10,8 +10,7 @@ GameObject::GameObject(const char* texture_file) {
 GameObject::~GameObject() {}
 
 void GameObject::update() {
-    x_position = 0;
-    y_position = 0;
+    position.zero();
     width = 32;
     height = 32;
 
@@ -20,8 +19,8 @@ void GameObject::update() {
     src_rect.w = 32;
     src_rect.h = 32;
 
-    dest_rect.x = x_position;
-    dest_rect.y = y_position;
+    dest_rect.x = position.x;
+    dest_rect.y = position.y;
     dest_rect.w = width;
     dest_rect.h = height;
 }

@@ -3,13 +3,13 @@
 
 #include "../main.hpp"
 
+#include "../ECS/components/components.hpp"
+
 #include <SDL2/SDL_render.h>
 
 class GameObject {
-
   private:
-    float x_position;
-    float y_position;
+    Vector2D position;
     int width;
     int height;
     int velocity = 0;
