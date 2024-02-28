@@ -1,7 +1,6 @@
 #include "tile.hpp"
 #include "../../../game/game.hpp"
 #include "../../../texturemanager/texturemanager.hpp"
-#include "../../../texturemanager/texturemanager.hpp"
 
 Tile::~Tile() {
     SDL_DestroyTexture(texture);

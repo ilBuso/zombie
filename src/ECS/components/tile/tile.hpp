@@ -1,25 +1,25 @@
 #ifndef TILE_HPP
-    #define TILE_HPP
+#define TILE_HPP
 
-        #include "../../../main.hpp"
+#include "../../../main.hpp"
 
-        #include "../../ECS.hpp"
-        #include "../../../vector2d/vector2d.hpp"
-        
-        class Tile : public Component {
-            private:
+#include "../../../vector2d/vector2d.hpp"
+#include "../../ECS.hpp"
 
-            public:
-                SDL_Texture* texture;
-                SDL_Rect src_rect, dest_rect;
+class Tile : public Component {
+  private:
+  public:
+    SDL_Texture* texture;
+    SDL_Rect src_rect, dest_rect;
 
-                Vector2D position;
+    Vector2D position;
 
-                Tile() = default;
-                ~Tile();
-                Tile(int src_x, int src_y, int x, int y, int size, int scale, std::string texture_id); 
+    Tile() = default;
+    ~Tile();
+    Tile(int src_x, int src_y, int x, int y, int size, int scale,
+         std::string texture_id);
 
-                void update() override;
-                void draw() override;
-        };
+    void update() override;
+    void draw() override;
+};
 #endif

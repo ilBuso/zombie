@@ -1,19 +1,18 @@
 #ifndef ANIMATION_HPP
-    #define ANIMATION_HPP
+#define ANIMATION_HPP
 
-        #include "../../../main.hpp"
+#include "../../../main.hpp"
 
-        #include "../../ECS.hpp"
+#include "../../ECS.hpp"
 
-        class Animation : public Component {
-            private:
+class Animation : public Component {
+  private:
+  public:
+    int index;
+    int frames;
+    int speed;
 
-            public:
-                int index;            
-                int frames;            
-                int speed;            
-
-                Animation();
-                Animation(int index, int frames, int speed);
-        };
+    Animation();
+    Animation(int index, int frames, int speed);
+};
 #endif

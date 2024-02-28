@@ -18,8 +18,7 @@ Sprite::Sprite(std::string texture_id, bool is_animated) {
     set_texture(texture_id);
 }
 
-Sprite::~Sprite() {
-}
+Sprite::~Sprite() {}
 
 void Sprite::init() {
     transform = &entity->get_component<Transform>();

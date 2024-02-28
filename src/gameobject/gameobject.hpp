@@ -1,26 +1,26 @@
 #ifndef GAMEOBJECT_HPP
-    #define GAMEOBJECT_HPP
+#define GAMEOBJECT_HPP
 
-        #include "../main.hpp"
+#include "../main.hpp"
 
-        class GameObject {
-            
-            private:
-                float x_position;
-                float y_position;
-                int width;
-                int height;
-                int velocity = 0;
+class GameObject {
 
-                SDL_Texture* texture;
-                SDL_Rect src_rect, dest_rect;
+  private:
+    float x_position;
+    float y_position;
+    int width;
+    int height;
+    int velocity = 0;
 
-            public:
-                GameObject(const char* texture);
-                ~GameObject();
-            
-                void update();
-                void render();
-        };
+    SDL_Texture* texture;
+    SDL_Rect src_rect, dest_rect;
+
+  public:
+    GameObject(const char* texture);
+    ~GameObject();
+
+    void update();
+    void render();
+};
 
 #endif

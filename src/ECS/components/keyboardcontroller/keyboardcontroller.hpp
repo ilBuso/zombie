@@ -1,23 +1,23 @@
 #ifndef KEYBOARDCONTROLLER_HPP
-    #define KEYBOARDCONTROLLER_HPP
+#define KEYBOARDCONTROLLER_HPP
 
-        #include "../../../main.hpp"
+#include "../../../main.hpp"
 
-        #include "../../../game/game.hpp"
-        #include "../../ECS.hpp"
+#include "../../../game/game.hpp"
+#include "../../ECS.hpp"
 
-        #include "../transform/transform.hpp"
-        #include "../sprite/sprite.hpp"
+#include "../sprite/sprite.hpp"
+#include "../transform/transform.hpp"
 
-        class KeyboardController : public Component {
-            private:
-                const Uint8* keystates;
-                
-            public:
-                Transform* transform;
-                Sprite* sprite;
+class KeyboardController : public Component {
+  private:
+    const Uint8* keystates;
 
-                void init() override;
-                void update() override;
-        };
+  public:
+    Transform* transform;
+    Sprite* sprite;
+
+    void init() override;
+    void update() override;
+};
 #endif

@@ -1,44 +1,43 @@
 #ifndef SPRITE_HPP
-    #define SPRITE_HPP
+#define SPRITE_HPP
 
-        #include "../../../main.hpp"
+#include "../../../main.hpp"
 
-        #include "../../ECS.hpp"
-        #include "../transform/transform.hpp"
-        #include "../../../texturemanager/texturemanager.hpp"
-        #include "../animation/animation.hpp"
-        #include "../../../game/game.hpp"
-        #include "../../../assetmanager/assetmanager.hpp"
- 
-        class Sprite : public Component {
-            private:
-                Transform* transform;
-                SDL_Texture* texture;
-                SDL_Rect src_rect, dest_rect;
+#include "../../../assetmanager/assetmanager.hpp"
+#include "../../../game/game.hpp"
+#include "../../../texturemanager/texturemanager.hpp"
+#include "../../ECS.hpp"
+#include "../animation/animation.hpp"
+#include "../transform/transform.hpp"
 
-                bool animated = false;
-                int frames = 0;
-                int speed = 100;
+class Sprite : public Component {
+  private:
+    Transform* transform;
+    SDL_Texture* texture;
+    SDL_Rect src_rect, dest_rect;
 
-            public:
-                int animation_index = 0;
-                std::map<std::string, Animation> animations;
+    bool animated = false;
+    int frames = 0;
+    int speed = 100;
 
-                SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
+  public:
+    int animation_index = 0;
+    std::map<std::string, Animation> animations;
 
-                Sprite() = default;
-                Sprite(std::string texture_id);
-                Sprite(std::string texture_id, bool is_animated);
-                ~Sprite();
+    SDL_RendererFlip sprite_flip = SDL_FLIP_NONE;
 
+    Sprite() = default;
+    Sprite(std::string texture_id);
+    Sprite(std::string texture_id, bool is_animated);
+    ~Sprite();
 
-                void init() override;
-                void update() override;
-                void draw() override;
+    void init() override;
+    void update() override;
+    void draw() override;
 
-                void set_texture(std::string texture_id);
+    void set_texture(std::string texture_id);
 
-                void play_animation(const std::string& animation_name);
-        };
+    void play_animation(const std::string& animation_name);
+};
 
 #endif

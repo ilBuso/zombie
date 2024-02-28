@@ -1,11 +1,11 @@
 #include "game.hpp"
 #include "../ECS/ECS.hpp"
 #include "../ECS/components/components.hpp"
+#include "../assetmanager/assetmanager.hpp"
 #include "../collision/collision.hpp"
 #include "../map/map.hpp"
 #include "../texturemanager/texturemanager.hpp"
 #include "../vector2d/vector2d.hpp"
-#include "../assetmanager/assetmanager.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -60,7 +60,6 @@ bool Game::init(void) {
 
     is_running = true;
 
-    std::cout << "Game Started" << std::endl;
     return true;
 }
 
@@ -68,7 +67,6 @@ void Game::kill() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-    std::cout << "Game Quitted" << std::endl;
 }
 
 void Game::setup() {
