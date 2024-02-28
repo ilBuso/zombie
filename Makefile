@@ -61,7 +61,22 @@ endif
 # Output executable
 EXECUTABLE := zombie
 
-all: check build run
+all: clean check build link run
+
+clean:
+	@echo "Cleaning"
+	@rm -rf $(OBJ_DIR)
+	@rm -f $(EXECUTABLE)
+
+check:
+	@echo "Formatting"
+	@for file in $(SRCS) $(HDRS); do \
+		clang-format --style=file -i $$file; \
+		if [ $$? -ne 0 ]; then \
+			echo "ERROR formatting $$file"; \
+			exit 1; \
+		fi; \
+	done; \
 
 build:
 	@echo "Building"
@@ -83,22 +98,7 @@ link:
 		echo "ERROR during linking"; \
 		exit 1; \
 	fi;
-
-check:
-	@echo "Formatting"
-	@for file in $(SRCS) $(HDRS); do \
-		clang-format --style=file -i $$file; \
-		if [ $$? -ne 0 ]; then \
-			echo "ERROR formatting $$file"; \
-			exit 1; \
-		fi; \
-	done; \
 	
 run:
 	@echo "Running"
 	./$(EXECUTABLE)
-
-clean:
-	@echo "Cleaning"
-	@rm -rf $(OBJ_DIR)
-	@rm -f $(EXECUTABLE)
