@@ -6,6 +6,7 @@ GAMEOBJECT_DIR     		:= $(SRC_DIR)/gameobject
 TEXTUREMANAGER_DIR 		:= $(SRC_DIR)/texturemanager
 COLLISION_DIR           := $(SRC_DIR)/collision
 VECTOR2D_DIR            := $(SRC_DIR)/vector2d
+ASSETMANAGER_DIR        := $(SRC_DIR)/assetmanager
 ECS_DIR            		:= $(SRC_DIR)/ECS
 COMPONENTS_DIR     		:= $(ECS_DIR)/components
 TRANSFORM_DIR      		:= $(COMPONENTS_DIR)/transform
@@ -14,30 +15,41 @@ COLLIDER_DIR         	:= $(COMPONENTS_DIR)/collider
 KEYBOARDCONTROLLER_DIR  := $(COMPONENTS_DIR)/keyboardcontroller
 TILE_DIR         	    := $(COMPONENTS_DIR)/tile
 TIME_DIR         		:= $(COMPONENTS_DIR)/time
-ANIMATIONS_DIR         	:= $(COMPONENTS_DIR)/animations
+ANIMATION_DIR         	:= $(COMPONENTS_DIR)/animation
 OBJ_DIR            		:= ./obj
 
-# Source files
-SRCS := \
-    $(wildcard $(SRC_DIR)/*.cpp) \
-    $(wildcard $(GAME_DIR)/*.cpp) \
-    $(wildcard $(MAP_DIR)/*.cpp) \
-    $(wildcard $(GAMEOBJECT_DIR)/*.cpp) \
-    $(wildcard $(TEXTUREMANAGER_DIR)/*.cpp) \
-    $(wildcard $(COLLISION_DIR)/*.cpp) \
-    $(wildcard $(VECTOR2D_DIR)/*.cpp) \
-    $(wildcard $(ECS_DIR)/*.cpp) \
-    $(wildcard $(COMPONENTS_DIR)/*.cpp) \
-    $(wildcard $(TRANSFORM_DIR)/*.cpp) \
-    $(wildcard $(SPRITE_DIR)/*.cpp) \
-    $(wildcard $(COLLIDER_DIR)/*.cpp) \
-    $(wildcard $(KEYBOARDCONTROLLER_DIR)/*.cpp) \
-    $(wildcard $(TILE_DIR)/*.cpp) \
-    $(wildcard $(TIME_DIR)/*.cpp) \
-    $(wildcard $(ANIMATIONS_DIR)/*.cpp) \
-    $(wildcard $(SPRITE_DIR)/*.cpp)
+# Directories
+SRC_DIRS := \
+    $(SRC_DIR) \
+    $(GAME_DIR) \
+    $(MAP_DIR) \
+    $(GAMEOBJECT_DIR) \
+    $(TEXTUREMANAGER_DIR) \
+    $(COLLISION_DIR) \
+    $(VECTOR2D_DIR) \
+    $(ASSETMANAGER_DIR) \
+    $(ECS_DIR) \
+    $(COMPONENTS_DIR) \
+    $(TRANSFORM_DIR) \
+    $(SPRITE_DIR) \
+    $(COLLIDER_DIR) \
+    $(KEYBOARDCONTROLLER_DIR) \
+    $(TILE_DIR) \
+    $(TIME_DIR) \
+    $(ANIMATION_DIR)
 
-# Libraries and flags
+# Source files
+SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
+HDRS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.hpp))
+OBJS := $(foreach dir,$(OBJ_DIR),$(wildcard $(dir)/*.o))
+DEPS := $(OBJS:.o=.d)
+
+# Include dependency files
+-include $(DEPS)
+
+# Compiler, Flags, Libraries
+CXX := g++
+CXXFLAGS := -Wall -Wextra -MMD -MP
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
     LIBS := -lSDL2 -lSDL2_image
@@ -52,80 +64,41 @@ EXECUTABLE := zombie
 all: check build run
 
 build:
-	@echo " - Starting Build"
+	@echo "Building"
 	@mkdir -p $(OBJ_DIR)
-	@SECONDS=0; \
-	total_files=$$(find $(SRC_DIR) -name '*.cpp' | wc -l); \
-	completed_files=0; \
-	progress="[..................................................]"; \
-	for file in $$(find $(SRC_DIR) -name '*.cpp'); do \
-		g++ -Wall -c $$file -o $(OBJ_DIR)/$$(basename $$file .cpp).o; \
+	@for file in $(SRCS); do \
+		filename=$$(basename $$file .cpp); \
+		mkdir -p $(OBJ_DIR)/$$filename; \
+		$(CXX) $(CXXFLAGS) -c $$file -o $(OBJ_DIR)/$$filename/$$filename.o; \
 		if [ $$? -ne 0 ]; then \
-			echo "Error building $$file"; \
+			echo "ERROR building $$file"; \
 			exit 1; \
 		fi; \
-		completed_files=$$(($$completed_files + 1)); \
-		percentage=$$(($$completed_files * 100 / $$total_files)); \
-		bar_length=$$(($$percentage * 50 / 100)); \
-		progress="["; \
-		i=0; \
-		while [ $$i -lt $$bar_length ]; do \
-			progress="$${progress}="; \
-			i=$$((i + 1)); \
-		done; \
-		i=$$bar_length; \
-		while [ $$i -lt 50 ]; do \
-			progress="$${progress}."; \
-			i=$$((i + 1)); \
-		done; \
-		progress="$${progress}]"; \
-		printf " - Building       %s %3d%%\r" "$$progress" $$percentage; \
-	done; \
-	g++ -Wall $(OBJ_DIR)/*.o -o $(EXECUTABLE) $(LIBS); \
-	if [ $$? -ne 0 ]; then \
-		echo "Error linking objects"; \
-		exit 1; \
-	fi; \
-	duration=$$SECONDS; \
-	echo -e "\n - Build completed successfully in $$duration seconds"
+	done
 
+link:
+	@echo "Linking"
+	@$(CXX) $(CXXFLAGS) $(wildcard $(OBJ_DIR)/**/*.o) -o $(EXECUTABLE) $(LIBS);
+	@if [ $$? -ne 0 ]; then \
+		echo "ERROR during linking"; \
+		exit 1; \
+	fi;
 
 check:
-	@echo " - Checking Code Formatting"
-	@SECONDS=0; \
-	total_files=$$(echo "$(SRCS)" | wc -w); \
-	completed_files=0; \
-	progress="[..................................................]"; \
-	for file in $(SRCS); do \
-		clang-format --style=file -i $$file >/dev/null 2>&1; \
+	@echo "Formatting"
+	@for file in $(SRCS); do \
+		clang-format --style=file -i $$file; \
 		if [ $$? -ne 0 ]; then \
-			echo "Error formatting $$file"; \
+			echo "ERROR formatting $$file"; \
 			exit 1; \
 		fi; \
-		completed_files=$$(($$completed_files + 1)); \
-		percentage=$$(($$completed_files * 100 / $$total_files)); \
-		bar_length=$$(($$percentage * 50 / 100)); \
-		progress="["; \
-		i=0; \
-		while [ $$i -lt $$bar_length ]; do \
-			progress="$${progress}="; \
-			i=$$((i + 1)); \
-		done; \
-		i=$$bar_length; \
-		while [ $$i -lt 50 ]; do \
-			progress="$${progress}."; \
-			i=$$((i + 1)); \
-		done; \
-		progress="$${progress}]"; \
-		printf " - Checking       %s %3d%%\r" "$$progress" $$percentage; \
 	done; \
-	duration=$$SECONDS; \
-	echo -e "\n - Check completed successfully in $$duration seconds"
 	
 run:
+	@echo "Running"
 	./$(EXECUTABLE)
 
 clean:
-	@echo " - Cleaning up"
+	@echo "Cleaning"
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(EXECUTABLE)

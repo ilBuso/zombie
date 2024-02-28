@@ -1,0 +1,298 @@
+# Define color variables
+YELLOW := $(shell tput setaf 3)
+GREEN := $(shell tput setaf 2)
+BLACK := $(shell tput setaf 232)
+GRAY := $(shell tput setaf 247)
+WHITE_BG := $(shell tput setab 7)
+YELLOW_BG := $(shell tput setab 3)
+RESET := $(shell tput sgr0)
+
+# Define links
+URL_GITHUB := "https://github.com/ilBuso/zombie"
+URL_DONATION := "https://bit.ly/3IfDX3V"
+URL_ISSUE := "http://bit.ly/3uOIOG6"
+
+all: b# Folders
+SRC_DIR              := ./src
+GAME_DIR             := $(SRC_DIR)/game
+MAP_DIR              := $(SRC_DIR)/map
+GAMEOBJECT_DIR       := $(SRC_DIR)/gameobject
+TEXTUREMANAGER_DIR   := $(SRC_DIR)/texturemanager
+COLLISION_DIR        := $(SRC_DIR)/collision
+VECTOR2D_DIR         := $(SRC_DIR)/vector2d
+ASSETMANAGER_DIR     := $(SRC_DIR)/assetmanager
+ECS_DIR              := $(SRC_DIR)/ECS
+COMPONENTS_DIR       := $(ECS_DIR)/components
+TRANSFORM_DIR        := $(COMPONENTS_DIR)/transform
+SPRITE_DIR           := $(COMPONENTS_DIR)/sprite
+COLLIDER_DIR         := $(COMPONENTS_DIR)/collider
+KEYBOARDCONTROLLER_DIR := $(COMPONENTS_DIR)/keyboardcontroller
+TILE_DIR             := $(COMPONENTS_DIR)/tile
+TIME_DIR             := $(COMPONENTS_DIR)/time
+ANIMATION_DIR        := $(COMPONENTS_DIR)/animation
+OBJ_DIR              := ./obj
+
+# Directories
+SRC_DIRS := \
+    $(SRC_DIR) \
+    $(GAME_DIR) \
+    $(MAP_DIR) \
+    $(GAMEOBJECT_DIR) \
+    $(TEXTUREMANAGER_DIR) \
+    $(COLLISION_DIR) \
+    $(VECTOR2D_DIR) \
+    $(ASSETMANAGER_DIR) \
+    $(ECS_DIR) \
+    $(COMPONENTS_DIR) \
+    $(TRANSFORM_DIR) \
+    $(SPRITE_DIR) \
+    $(COLLIDER_DIR) \
+    $(KEYBOARDCONTROLLER_DIR) \
+    $(TILE_DIR) \
+    $(TIME_DIR) \
+    $(ANIMATION_DIR)
+
+# Source files
+SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
+HDRS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.hpp))
+OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS := $(OBJS:.o=.d)
+
+# Compiler, Flags, Libraries
+CXX := g++
+CXXFLAGS := -Wall -MMD -MP
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    LIBS := -lSDL2 -lSDL2_image
+endif
+ifeq ($(UNAME_S),Darwin)
+    LIBS := -framework SDL2 -framework SDL2_image
+endif
+
+# Output executable
+EXECUTABLE := zombie
+
+# Include dependency files
+-include $(DEPS)
+
+all: check build run
+
+build: $(OBJS)
+    @echo " - Linking"
+    @$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXECUTABLE) $(LIBS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+    @echo " - Compiling $<"
+    @mkdir -p $(dir $@)
+    @$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+    @mkdir -p $(OBJ_DIR)
+
+check: check_code check_headers
+
+check_code:
+    @echo " - Checking Code Formatting"
+    @clang-format --style=file -i $(SRCS) $(HDRS)
+    @echo " - Code check complete"
+
+check_headers:
+    @echo " - Checking Headers"
+    @clang-format --style=file -i $(HDRS)
+    @echo " - Header check complete"
+
+run:
+    ./$(EXECUTABLE)
+
+clean:
+    @echo " - Cleaning up"
+    @rm -rf $(OBJ_DIR)
+    @rm -f $(EXECUTABLE)
+
+.PHONY: all build check check_code check_headers run clean
+uild run
+
+info:
+	@echo -e ""
+	@echo -e "    \U0001F3AE GameEngine $(GREEN)[v0.0.1-alpha]$(RESET)"
+	@echo -e "    $(GRAY)by ilBuso - BeanieEntertainment$(RESET)"
+	@echo -e ""
+	@echo -e "   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo -e ""
+	@echo -e "    $(YELLOW)!!! This is an $(BLACK)$(YELLOW_BG) alpha $(RESET)$(YELLOW)!!!$(RESET)"
+	@echo -e "    Feedback? $(GRAY)$(URL_ISSUE)$(RESET)"
+	@echo -e ""
+	@echo -e "    \U0001F4BB You can find the source code at:"
+	@echo -e "    $(GRAY)$(URL_GITHUB)$(RESET)"
+	@echo -e ""
+	@echo -e "    \U0001F4B5 You want to support the project?"
+	@echo -e "    $(GRAY)$(URL_DONATION)$(RESET)"
+	@echo -e ""
+
+build:
+	@echo ""
+	@mkdir -p $(OBJ_DIR)
+	@SECONDS=0; \
+	for file in $(SRCS); do \
+		mkdir -p $(OBJ_DIR)/$$(basename $$file .cpp); \
+		$(CXX) $(CXXFLAGS) -c $$file -o $(OBJ_DIR)/$$(basename $$file .cpp)/$$(basename $$file .cpp).o; \
+		if [ $$? -ne 0 ]; then \
+			echo " [X] Building"; \
+			exit 1; \
+		fi; \
+		NUM_DOTS=0; \
+		while [ $$NUM_DOTS -lt 4 ]; do \
+			DOTS=""; \
+			i=0; \
+			while [ $$i -lt $$NUM_DOTS ]; do \
+				DOTS="$$DOTS."; \
+				i=$$(($$i + 1)); \
+			done; \
+			echo -ne " [ ] Building$$DOTS   \r"; \
+			sleep 0.5; \
+			NUM_DOTS=$$(($$NUM_DOTS + 1)); \
+		done; \
+		echo -e " [ ] Building... Done"; \
+	done; \
+	duration=$$SECONDS; \
+	echo -e "\n - Build completed successfully in $$duration seconds"
+	@ make link
+
+link:
+	@echo ""
+	@$(CXX) $(CXXFLAGS) -o $(EXECUTABLE) $(OBJS) $(LIBS); \
+	if [ $$? -ne 0 ]; then \
+		echo " [x] Linking"; \
+		exit 1; \
+	fi; \
+	echo -e " - Linking... Done"
+
+check:
+	@echo "
+	@echo " [ ] Checking"
+	@echo ""
+	@clang-format --style=file -i $(SRCS) $(HDRS)
+
+run:
+	@echo ""
+	@echo " [ ] Running"
+	@echo ""
+	@./$(EXECUTABLE)
+
+clean:
+	@echo ""
+	@echo " [ ] Cleaning"
+	@rm -rf $(OBJ_DIR)
+	@rm -f $(EXECUTABLE)
+	@rm -f build-done.tmp
+
+
+
+
+-----------------------------------------
+Minimal
+
+# Folders
+SRC_DIR            		:= ./src
+GAME_DIR           		:= $(SRC_DIR)/game
+MAP_DIR            		:= $(SRC_DIR)/map
+GAMEOBJECT_DIR     		:= $(SRC_DIR)/gameobject
+TEXTUREMANAGER_DIR 		:= $(SRC_DIR)/texturemanager
+COLLISION_DIR           := $(SRC_DIR)/collision
+VECTOR2D_DIR            := $(SRC_DIR)/vector2d
+ASSETMANAGER_DIR        := $(SRC_DIR)/assetmanager
+ECS_DIR            		:= $(SRC_DIR)/ECS
+COMPONENTS_DIR     		:= $(ECS_DIR)/components
+TRANSFORM_DIR      		:= $(COMPONENTS_DIR)/transform
+SPRITE_DIR         		:= $(COMPONENTS_DIR)/sprite
+COLLIDER_DIR         	:= $(COMPONENTS_DIR)/collider
+KEYBOARDCONTROLLER_DIR  := $(COMPONENTS_DIR)/keyboardcontroller
+TILE_DIR         	    := $(COMPONENTS_DIR)/tile
+TIME_DIR         		:= $(COMPONENTS_DIR)/time
+ANIMATION_DIR         	:= $(COMPONENTS_DIR)/animation
+OBJ_DIR            		:= ./obj
+
+# Directories
+SRC_DIRS := \
+    $(SRC_DIR) \
+    $(GAME_DIR) \
+    $(MAP_DIR) \
+    $(GAMEOBJECT_DIR) \
+    $(TEXTUREMANAGER_DIR) \
+    $(COLLISION_DIR) \
+    $(VECTOR2D_DIR) \
+    $(ASSETMANAGER_DIR) \
+    $(ECS_DIR) \
+    $(COMPONENTS_DIR) \
+    $(TRANSFORM_DIR) \
+    $(SPRITE_DIR) \
+    $(COLLIDER_DIR) \
+    $(KEYBOARDCONTROLLER_DIR) \
+    $(TILE_DIR) \
+    $(TIME_DIR) \
+    $(ANIMATION_DIR)
+
+# Source files
+SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
+HDRS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.hpp))
+OBJS := $(foreach dir,$(OBJ_DIR),$(wildcard $(dir)/*.o))
+DEPS := $(OBJS:.o=.d)
+
+# Include dependency files
+-include $(DEPS)
+
+# Compiler, Flags, Libraries
+CXX := g++
+CXXFLAGS := -Wall -MMD -MP
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    LIBS := -lSDL2 -lSDL2_image
+endif
+ifeq ($(UNAME_S),Darwin)
+    LIBS := -framework SDL2 -framework SDL2_image
+endif
+
+# Output executable
+EXECUTABLE := zombie
+
+all: check build run
+
+build:
+	@echo "Building"
+	@mkdir -p $(OBJ_DIR)
+	@for file in $(SRCS); do \
+		filename=$$(basename $$file .cpp); \
+		mkdir -p $(OBJ_DIR)/$$filename; \
+		$(CXX) $(CXXFLAGS) -c $$file -o $(OBJ_DIR)/$$filename/$$filename.o; \
+		if [ $$? -ne 0 ]; then \
+			echo "ERROR building $$file"; \
+			exit 1; \
+		fi; \
+	done
+
+link:
+	@echo "Linking"
+	@$(CXX) $(CXXFLAGS) $(wildcard $(OBJ_DIR)/**/*.o) -o $(EXECUTABLE) $(LIBS);
+	@if [ $$? -ne 0 ]; then \
+		echo "ERROR during linking"; \
+		exit 1; \
+	fi;
+
+check:
+	@echo "Formatting"
+	@for file in $(SRCS); do \
+		clang-format --style=file -i $$file; \
+		if [ $$? -ne 0 ]; then \
+			echo "ERROR formatting $$file"; \
+			exit 1; \
+		fi; \
+	done; \
+	
+run:
+	@echo "Running"
+	./$(EXECUTABLE)
+
+clean:
+	@echo "Cleaning"
+	@rm -rf $(OBJ_DIR)
+	@rm -f $(EXECUTABLE)
