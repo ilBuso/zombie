@@ -3,6 +3,8 @@
 
 #include "../main.hpp"
 
+#include <SDL2/SDL_render.h>
+
 class GameObject {
 
   private:

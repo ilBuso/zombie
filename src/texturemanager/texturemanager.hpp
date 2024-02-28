@@ -2,6 +2,7 @@
 #define TEXTUREMANAGER_HPP
 
 #include "../main.hpp"
+
 #include <SDL2/SDL_render.h>
 
 class TextureManager {

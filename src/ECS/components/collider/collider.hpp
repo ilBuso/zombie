@@ -6,6 +6,8 @@
 #include "../../ECS.hpp"
 #include "../transform/transform.hpp"
 
+#include <SDL2/SDL_render.h>
+
 class Collider : public Component {
   private:
   public:

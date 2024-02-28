@@ -3,9 +3,7 @@
 
 #include "../../../main.hpp"
 
-#include "../../../game/game.hpp"
 #include "../../ECS.hpp"
-
 #include "../sprite/sprite.hpp"
 #include "../transform/transform.hpp"
 

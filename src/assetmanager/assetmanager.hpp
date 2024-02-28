@@ -5,7 +5,8 @@
 
 #include "../ECS/ECS.hpp"
 #include "../texturemanager/texturemanager.hpp"
-#include "../vector2d/vector2d.hpp"
+
+#include <map>
 
 class AssetManager {
   private:

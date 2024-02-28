@@ -1,6 +1,8 @@
 #include "collider.hpp"
+
 #include "../../../game/game.hpp"
 #include "../../../texturemanager/texturemanager.hpp"
+
 #include <SDL2/SDL_render.h>
 
 Collider::Collider(std::string tag) {

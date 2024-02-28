@@ -3,6 +3,8 @@
 
 #include "../main.hpp"
 
+#include <string>
+
 class Map {
   private:
     std::string texture_id;

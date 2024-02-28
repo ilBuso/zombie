@@ -3,12 +3,12 @@
 
 #include "../../../main.hpp"
 
-#include "../../../assetmanager/assetmanager.hpp"
-#include "../../../game/game.hpp"
-#include "../../../texturemanager/texturemanager.hpp"
 #include "../../ECS.hpp"
 #include "../animation/animation.hpp"
 #include "../transform/transform.hpp"
+
+#include <SDL2/SDL_render.h>
+#include <map>
 
 class Sprite : public Component {
   private:

@@ -3,6 +3,8 @@
 
 #include "../main.hpp"
 
+#include <SDL2/SDL_rect.h>
+
 class Collider;
 
 class Collision {

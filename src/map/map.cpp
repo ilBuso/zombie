@@ -1,7 +1,10 @@
 #include "map.hpp"
+
 #include "../ECS/components/components.hpp"
 #include "../game/game.hpp"
 #include "../texturemanager/texturemanager.hpp"
+
+#include <fstream>
 
 extern Manager manager;
 

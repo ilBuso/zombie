@@ -1,10 +1,13 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "../main.hpp"
+
 #include "../ECS/components/time/time.hpp"
 #include "../assetmanager/assetmanager.hpp"
-#include "../main.hpp"
-#include "../vector2d/vector2d.hpp"
+
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_render.h>
 
 class Collider;
 

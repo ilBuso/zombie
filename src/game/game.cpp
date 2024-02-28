@@ -1,11 +1,10 @@
 #include "game.hpp"
-#include "../ECS/ECS.hpp"
+
 #include "../ECS/components/components.hpp"
-#include "../assetmanager/assetmanager.hpp"
 #include "../collision/collision.hpp"
 #include "../map/map.hpp"
-#include "../texturemanager/texturemanager.hpp"
-#include "../vector2d/vector2d.hpp"
+
+#include <SDL2/SDL.h>
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;

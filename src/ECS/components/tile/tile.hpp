@@ -6,6 +6,8 @@
 #include "../../../vector2d/vector2d.hpp"
 #include "../../ECS.hpp"
 
+#include <SDL2/SDL_render.h>
+
 class Tile : public Component {
   private:
   public:

@@ -1,5 +1,8 @@
 #include "keyboardcontroller.hpp"
-#include <SDL2/SDL_scancode.h>
+
+#include "../../../game/game.hpp"
+
+#include <SDL2/SDL_keyboard.h>
 
 void KeyboardController::init() {
     transform = &entity->get_component<Transform>();

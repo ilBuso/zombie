@@ -3,6 +3,12 @@
 
 #include "../main.hpp"
 
+#include <array>
+#include <bitset>
+#include <iostream>
+#include <memory>
+#include <vector>
+
 class Component;
 class Entity;
 class Manager;

@@ -1,4 +1,5 @@
 #include "transform.hpp"
+#include <math.h>
 
 Transform::Transform() {
     position.zero();

@@ -1,7 +1,7 @@
 #include "ECS.hpp"
+
+#include <algorithm>
 #include <iterator>
-#include <memory>
-#include <pstl/glue_algorithm_defs.h>
 
 void Entity::update() {
     for (auto& c : components) {

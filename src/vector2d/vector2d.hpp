@@ -1,5 +1,6 @@
 #ifndef VECTOR2D_HPP
 #define VECTOR2D_HPP
+
 #include "../main.hpp"
 
 class Vector2D {

@@ -1,5 +1,9 @@
 #include "sprite.hpp"
 
+#include "../../../game/game.hpp"
+
+#include <SDL2/SDL_timer.h>
+
 Sprite::Sprite(std::string texture_id) {
     set_texture(texture_id);
 }
