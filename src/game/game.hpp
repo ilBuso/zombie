@@ -1,8 +1,6 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "../main.hpp"
-
 #include "../ECS/components/time/time.hpp"
 #include "../assetmanager/assetmanager.hpp"
 
@@ -14,6 +12,9 @@ class Collider;
 class Game {
   private:
     SDL_Window* window = nullptr;
+
+    int window_whidth;
+    int window_height;
 
   public:
     static SDL_Renderer* renderer;

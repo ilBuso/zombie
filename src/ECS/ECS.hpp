@@ -1,8 +1,6 @@
 #ifndef ECS_HPP
 #define ECS_HPP
 
-#include "../main.hpp"
-
 #include <array>
 #include <bitset>
 #include <iostream>

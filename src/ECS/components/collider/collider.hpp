@@ -1,8 +1,6 @@
 #ifndef COLLIDER_HPP
 #define COLLIDER_HPP
 
-#include "../../../main.hpp"
-
 #include "../../ECS.hpp"
 #include "../transform/transform.hpp"
 

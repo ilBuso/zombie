@@ -1,8 +1,6 @@
 #ifndef ASSETMANAGER_HPP
 #define ASSETMANAGER_HPP
 
-#include "../main.hpp"
-
 #include "../ECS/ECS.hpp"
 #include "../texturemanager/texturemanager.hpp"
 

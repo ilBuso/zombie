@@ -1,8 +1,6 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
-#include "../../../main.hpp"
-
 #include "../../ECS.hpp"
 
 class Animation : public Component {

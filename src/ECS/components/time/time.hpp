@@ -1,8 +1,6 @@
 #ifndef TIME_HPP
 #define TIME_HPP
 
-#include "../../../main.hpp"
-
 #include "../../ECS.hpp"
 
 class Time : public Component {

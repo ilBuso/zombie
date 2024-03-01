@@ -1,8 +1,6 @@
 #ifndef COMPONENTS_HPP
 #define COMPONENTS_HPP
 
-#include "../../main.hpp"
-
 #include "./animation/animation.hpp"
 #include "./collider/collider.hpp"
 #include "./keyboardcontroller/keyboardcontroller.hpp"

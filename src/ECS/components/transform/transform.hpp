@@ -1,8 +1,6 @@
 #ifndef TRANSFORM_HPP
 #define TRANSFORM_HPP
 
-#include "../../../main.hpp"
-
 #include "../../../vector2d/vector2d.hpp"
 #include "../../ECS.hpp"
 #include "../time/time.hpp"

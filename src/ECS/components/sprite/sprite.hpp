@@ -1,8 +1,6 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
 
-#include "../../../main.hpp"
-
 #include "../../ECS.hpp"
 #include "../animation/animation.hpp"
 #include "../transform/transform.hpp"

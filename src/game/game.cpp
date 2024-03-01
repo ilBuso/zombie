@@ -35,27 +35,22 @@ bool Game::init(void) {
     }
 
     // Create window
-    window = SDL_CreateWindow("zombie",               // Window tytle
-                              SDL_WINDOWPOS_CENTERED, // X position
-                              SDL_WINDOWPOS_CENTERED, // Y position
-                              WINDOW_WIDTH,           // Width
-                              WINDOW_HEIGHT,          // Height
-                              0                       // Flags
-    );
+    window =
+        SDL_CreateWindow(NULL, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                         0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
     if (!window) {
         std::cerr << "Error creating SDL Window" << std::endl;
         return false;
     }
 
     // Create renderer
-    renderer = SDL_CreateRenderer(window, // Target
-                                  -1,     // Display
-                                  0       // Flags
-    );
+    renderer = SDL_CreateRenderer(window, -1, 0);
     if (!renderer) {
         std::cerr << "Error creating SDL Renderer" << std::endl;
         return false;
     }
+
+    SDL_GetWindowSize(window, &window_whidth, &window_height);
 
     is_running = true;
 
@@ -119,10 +114,10 @@ void Game::update() {
 
     camera.x = (player_transform.position.x +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -
-               (WINDOW_WIDTH / 2.0f);
+               (window_whidth / 2.0f);
     camera.y = (player_transform.position.y +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -
-               (WINDOW_HEIGHT / 2.0f);
+               (window_height / 2.0f);
 
     if (camera.x < 0) {
         camera.x = 0;

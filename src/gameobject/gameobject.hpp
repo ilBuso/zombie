@@ -1,8 +1,6 @@
 #ifndef GAMEOBJECT_HPP
 #define GAMEOBJECT_HPP
 
-#include "../main.hpp"
-
 #include "../ECS/components/components.hpp"
 
 #include <SDL2/SDL_render.h>

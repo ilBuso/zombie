@@ -1,8 +1,6 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 
-#include "../../../main.hpp"
-
 #include "../../../vector2d/vector2d.hpp"
 #include "../../ECS.hpp"
 

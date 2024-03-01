@@ -1,8 +1,6 @@
 #ifndef COLLISION_HPP
 #define COLLISION_HPP
 
-#include "../main.hpp"
-
 #include <SDL2/SDL_rect.h>
 
 class Collider;

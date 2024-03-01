@@ -1,8 +1,6 @@
 #ifndef KEYBOARDCONTROLLER_HPP
 #define KEYBOARDCONTROLLER_HPP
 
-#include "../../../main.hpp"
-
 #include "../../ECS.hpp"
 #include "../sprite/sprite.hpp"
 #include "../transform/transform.hpp"
