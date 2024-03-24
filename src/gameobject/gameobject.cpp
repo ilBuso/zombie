@@ -1,30 +1,13 @@
 #include "gameobject.hpp"
 
-#include "../game/game.hpp"
 #include "../texturemanager/texturemanager.hpp"
 
-GameObject::GameObject(const char* texture_file) {
-    this->texture = TextureManager::load_texture(texture_file);
-}
+GameObject::GameObject(std::string tag, bool is_animated,
+                       Game::group_labels group)
+    : gameobject(Game::manager->add_entity()) {
 
-GameObject::~GameObject() {}
+    gameobject.add_group(group);
 
-void GameObject::update() {
-    position.zero();
-    width = 32;
-    height = 32;
-
-    src_rect.x = 0;
-    src_rect.y = 0;
-    src_rect.w = 32;
-    src_rect.h = 32;
-
-    dest_rect.x = position.x;
-    dest_rect.y = position.y;
-    dest_rect.w = width;
-    dest_rect.h = height;
-}
-
-void GameObject::render() {
-    SDL_RenderCopy(Game::renderer, texture, &src_rect, &dest_rect);
+    gameobject.add_component<Transform>();
+    gameobject.add_component<Sprite>(tag, is_animated);
 }

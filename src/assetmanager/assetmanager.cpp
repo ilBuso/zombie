@@ -1,5 +1,7 @@
 #include "assetmanager.hpp"
 
+#include "../game/game.hpp"
+
 AssetManager::AssetManager(Manager* manager) {
     this->manager = manager;
 }

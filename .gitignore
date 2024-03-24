@@ -3,3 +3,6 @@ zombie
 
 # Ignore obj folder
 obj/
+
+# Ignore .vscode
+.vscode

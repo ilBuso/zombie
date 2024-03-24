@@ -13,17 +13,19 @@ class Game {
   private:
     SDL_Window* window = nullptr;
 
-    int window_whidth;
+    int window_width;
     int window_height;
 
   public:
+    static Manager* manager;
+
     static SDL_Renderer* renderer;
     static SDL_Event event;
     static bool is_running;
     static SDL_Rect camera;
     static AssetManager* asset_manager;
 
-    enum group_lables : std::size_t {
+    enum group_labels : std::size_t {
         map_group,
         players_group,
         colliders_group,

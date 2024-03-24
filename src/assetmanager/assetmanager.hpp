@@ -4,7 +4,10 @@
 #include "../ECS/ECS.hpp"
 #include "../texturemanager/texturemanager.hpp"
 
+#include "../ECS/components/components.hpp"
+
 #include <map>
+#include <string>
 
 class AssetManager {
   private:

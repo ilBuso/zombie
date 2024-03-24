@@ -2,25 +2,18 @@
 #define GAMEOBJECT_HPP
 
 #include "../ECS/components/components.hpp"
+#include "../game/game.hpp"
+
+#include <string>
 
 #include <SDL2/SDL_render.h>
 
 class GameObject {
   private:
-    Vector2D position;
-    int width;
-    int height;
-    int velocity = 0;
-
-    SDL_Texture* texture;
-    SDL_Rect src_rect, dest_rect;
-
   public:
-    GameObject(const char* texture);
-    ~GameObject();
+    Entity& gameobject;
 
-    void update();
-    void render();
+    GameObject(std::string tag, bool is_animated, Game::group_labels group);
 };
 
 #endif
