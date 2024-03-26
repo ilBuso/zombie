@@ -8,4 +8,5 @@
 #include "./tile/tile.hpp"
 #include "./time/time.hpp"
 #include "./transform/transform.hpp"
+#include "./script/script.hpp"
 #endif

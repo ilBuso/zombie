@@ -14,11 +14,9 @@ SDL_Rect Game::camera = {0, 0, 1550, 1550};
 Time d_time;
 
 Map* map;
-// auto& player(manager->add_entity());
-
-GameObject* player;
 
 Manager* Game::manager = new Manager();
+auto& player(Game::manager->add_entity());
 
 AssetManager* Game::asset_manager = new AssetManager(manager);
 
@@ -75,18 +73,12 @@ void Game::setup() {
     map = new Map("map", 2, 32);
     map->load_map("assets/map/map.map", 32, 32);
 
-    player = new GameObject("player", true, Game::players_group);
-
-    player->gameobject.add_component<Time>();
-    player->gameobject.add_component<Collider>("player");
-    player->gameobject.add_component<KeyboardController>();
-
-    /*player.add_component<Time>();
+    player.add_component<Time>();
     player.add_component<Transform>(3);
     player.add_component<Collider>("player");
     player.add_component<Sprite>("player", true);
     player.add_component<KeyboardController>();
-    player.add_group(players_group);*/
+    player.add_group(players_group);
 }
 
 auto& tiles(Game::manager->get_group(Game::map_group));
@@ -107,10 +99,8 @@ void Game::handle_events() {
 
 void Game::update() {
 
-    SDL_Rect player_collider =
-        player->gameobject.get_component<Collider>().collider;
-    Vector2D player_position =
-        player->gameobject.get_component<Transform>().position;
+    SDL_Rect player_collider = player.get_component<Collider>().collider;
+    Vector2D player_position = player.get_component<Transform>().position;
 
     manager->refresh();
     manager->update();
@@ -118,12 +108,11 @@ void Game::update() {
     for (auto& c : colliders) {
         SDL_Rect c_collider = c->get_component<Collider>().collider;
         if (Collision::AABB(c_collider, player_collider)) {
-            player->gameobject.get_component<Transform>().position =
-                player_position;
+            player.get_component<Transform>().position = player_position;
         }
     }
 
-    Transform player_transform = player->gameobject.get_component<Transform>();
+    Transform player_transform = player.get_component<Transform>();
 
     camera.x = (player_transform.position.x +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -

@@ -61,14 +61,14 @@ endif
 # Output executable
 EXECUTABLE := zombie
 
-all: clean check build link run
+all: clean format build link run
 
 clean:
 	@echo "Cleaning"
 	@rm -rf $(OBJ_DIR)
 	@rm -f $(EXECUTABLE)
 
-check:
+format:
 	@echo "Formatting"
 	@for file in $(SRCS) $(HDRS); do \
 		clang-format --style=file -i $$file; \
@@ -91,7 +91,7 @@ build:
 		fi; \
 	done
 
-link:
+link: 
 	@echo "Linking"
 	@$(CXX) $(CXXFLAGS) $(wildcard $(OBJ_DIR)/**/*.o) -o $(EXECUTABLE) $(LIBS);
 	@if [ $$? -ne 0 ]; then \
