@@ -1,6 +1,6 @@
 #include "collider.hpp"
 
-#include "../../../game/game.hpp"
+#include "../../../../app/world/world.hpp"
 #include "../../../texturemanager/texturemanager.hpp"
 
 #include <SDL2/SDL_render.h>
@@ -35,8 +35,8 @@ void Collider::update() {
         collider.h = transform->height * transform->scale;
     }
 
-    dest_rect.x = collider.x - Game::camera.x;
-    dest_rect.y = collider.y - Game::camera.y;
+    dest_rect.x = collider.x - World::camera.x;
+    dest_rect.y = collider.y - World::camera.y;
 }
 
 void Collider::draw() {

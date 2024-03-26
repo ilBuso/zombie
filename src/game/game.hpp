@@ -8,42 +8,31 @@
 #include <SDL2/SDL_render.h>
 
 class Collider;
+class World;
 
 class Game {
   private:
     SDL_Window* window = nullptr;
 
-    int window_width;
-    int window_height;
-
   public:
-    static Manager* manager;
-
     static SDL_Renderer* renderer;
     static SDL_Event event;
     static bool is_running;
-    static SDL_Rect camera;
-    static AssetManager* asset_manager;
 
-    enum group_labels : std::size_t {
-        map_group,
-        players_group,
-        colliders_group,
-    };
-
-    Time* time;
+    static int window_width;
+    static int window_height;
 
     Game();
     ~Game();
 
     /// Functions
     bool init();
-    void setup();
+    virtual void setup(){};
     void kill();
 
     void handle_events();
-    void update();
-    void render();
+    virtual void update(){};
+    virtual void render(){};
 
     bool running();
 };

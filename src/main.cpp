@@ -1,21 +1,23 @@
+#include "../app/world/world.hpp"
 #include "./game/game.hpp"
 
 int main() {
 
     // Create game instance
     Game* game = new Game();
+    World* world = new World();
 
     // Initialize game
     game->init();
 
     // Inital setup
-    game->setup();
+    world->setup();
 
     // Game loop
     while (game->running()) {
         game->handle_events();
-        game->update();
-        game->render();
+        world->update();
+        world->render();
     }
 
     // Close game

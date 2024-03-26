@@ -4,9 +4,9 @@
 #include "./animation/animation.hpp"
 #include "./collider/collider.hpp"
 #include "./keyboardcontroller/keyboardcontroller.hpp"
+#include "./script/script.hpp"
 #include "./sprite/sprite.hpp"
 #include "./tile/tile.hpp"
 #include "./time/time.hpp"
 #include "./transform/transform.hpp"
-#include "./script/script.hpp"
 #endif

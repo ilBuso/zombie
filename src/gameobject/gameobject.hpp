@@ -13,7 +13,7 @@ class GameObject {
   public:
     Entity& gameobject;
 
-    GameObject(std::string tag, bool is_animated, Game::group_labels group);
+    GameObject(std::string tag, bool is_animated);
 };
 
 #endif

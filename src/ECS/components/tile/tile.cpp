@@ -1,6 +1,6 @@
 #include "tile.hpp"
 
-#include "../../../game/game.hpp"
+#include "../../../../app/world/world.hpp"
 #include "../../../texturemanager/texturemanager.hpp"
 
 Tile::~Tile() {
@@ -9,7 +9,7 @@ Tile::~Tile() {
 
 Tile::Tile(int src_x, int src_y, int x, int y, int size, int scale,
            std::string texture_id) {
-    texture = Game::asset_manager->get_texture(texture_id);
+    texture = World::asset_manager->get_texture(texture_id);
 
     position.x = x;
     position.y = y;
@@ -24,8 +24,8 @@ Tile::Tile(int src_x, int src_y, int x, int y, int size, int scale,
 }
 
 void Tile::update() {
-    dest_rect.x = position.x - Game::camera.x;
-    dest_rect.y = position.y - Game::camera.y;
+    dest_rect.x = position.x - World::camera.x;
+    dest_rect.y = position.y - World::camera.y;
 }
 
 void Tile::draw() {

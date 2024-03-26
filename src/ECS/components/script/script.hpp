@@ -6,7 +6,7 @@
         private:
 
         public:
-            void init() override;
-            void update() override;
+            void init() override {};
+            void update() override {};
     };
 #endif

@@ -16,6 +16,8 @@ KEYBOARDCONTROLLER_DIR  := $(COMPONENTS_DIR)/keyboardcontroller
 TILE_DIR         	    := $(COMPONENTS_DIR)/tile
 TIME_DIR         		:= $(COMPONENTS_DIR)/time
 ANIMATION_DIR         	:= $(COMPONENTS_DIR)/animation
+APP_DIR		         	:= ./app
+WORLD_DIR		        := $(APP_DIR)/world
 OBJ_DIR            		:= ./obj
 
 # Directories
@@ -36,7 +38,9 @@ SRC_DIRS := \
     $(KEYBOARDCONTROLLER_DIR) \
     $(TILE_DIR) \
     $(TIME_DIR) \
-    $(ANIMATION_DIR)
+    $(ANIMATION_DIR) \
+    $(APP_DIR) \
+	$(WORLD_DIR)
 
 # Source files
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
