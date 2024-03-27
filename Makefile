@@ -18,6 +18,7 @@ TIME_DIR         		:= $(COMPONENTS_DIR)/time
 ANIMATION_DIR         	:= $(COMPONENTS_DIR)/animation
 APP_DIR		         	:= ./app
 WORLD_DIR		        := $(APP_DIR)/world
+PLAYER_DIR		        := $(APP_DIR)/player
 OBJ_DIR            		:= ./obj
 
 # Directories
@@ -40,7 +41,8 @@ SRC_DIRS := \
     $(TIME_DIR) \
     $(ANIMATION_DIR) \
     $(APP_DIR) \
-	$(WORLD_DIR)
+	$(WORLD_DIR) \
+	$(PLAYER_DIR)
 
 # Source files
 SRCS := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
@@ -53,7 +55,7 @@ DEPS := $(OBJS:.o=.d)
 
 # Compiler, Flags, Libraries
 CXX := g++
-CXXFLAGS := -Wall -Wextra -MMD -MP
+CXXFLAGS := -Wall -Wextra -MMD -MP -std=c++11
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
     LIBS := -lSDL2 -lSDL2_image
@@ -64,6 +66,9 @@ endif
 
 # Output executable
 EXECUTABLE := zombie
+
+# Valgrind options
+VALGRIND_OPTIONS := --leak-check=full --show-leak-kinds=all
 
 all: clean format build link run
 
@@ -106,3 +111,7 @@ link:
 run:
 	@echo "Running"
 	./$(EXECUTABLE)
+
+fuck:
+	@echo "Running Valgrind..."
+	valgrind $(VALGRIND_OPTIONS) ./$(EXECUTABLE)

@@ -2,6 +2,7 @@
 #include "./game/game.hpp"
 
 int main() {
+    std::cout << "ciao";
 
     // Create game instance
     Game* game = new Game();

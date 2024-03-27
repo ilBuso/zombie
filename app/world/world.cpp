@@ -25,7 +25,6 @@ void World::setup() {
     player.add_component<Collider>("player");
     player.add_component<Sprite>("player", true);
     player.add_component<KeyboardController>();
-    player.add_component<Script>();
     player.add_group(World::players_group);
 }
 
