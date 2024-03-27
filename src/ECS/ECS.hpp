@@ -56,11 +56,10 @@ class Entity {
   public:
     Entity(Manager& m_manager) : manager(m_manager) {}
 
-    virtual void update();
+    void update();
     void draw();
     bool is_active();
     void destroy();
-    virtual void init(){};
 
     template <typename T>
     bool has_component() const {
