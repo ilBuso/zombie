@@ -54,9 +54,10 @@ class Entity {
     Group_bitset group_bitset;
 
   public:
-    Entity(Manager& m_manager) : manager(m_manager) {}
+    Entity(Manager& m_manager) : manager(m_manager){};
 
-    void update();
+    virtual void init(){};
+    virtual void update();
     void draw();
     bool is_active();
     void destroy();

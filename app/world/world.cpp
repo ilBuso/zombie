@@ -1,10 +1,11 @@
 #include "world.hpp"
+
 #include "../../src/zombie.hpp"
 
 SDL_Rect World::camera = {0, 0, 1550, 1550};
 
 Manager* World::manager = new Manager();
-auto& player(World::manager->add_entity());
+Entity& World::player(World::manager->add_entity());
 
 AssetManager* World::asset_manager = new AssetManager(manager);
 
@@ -25,7 +26,6 @@ void World::setup() {
     player.add_component<Collider>("player");
     player.add_component<Sprite>("player", true);
     player.add_component<KeyboardController>();
-    player.add_component<Script>();
     player.add_group(World::players_group);
 }
 
@@ -83,14 +83,3 @@ void World::render() {
 
     SDL_RenderPresent(renderer);
 }
-
-/*
-HA SENSO:
-perché questo script è tipo game.cpp e se forzi l'utente a
-creare un file world.cpp in cui inizializza le varie entità
-e aggiunge i componenti.
-
-CI STA:
-per la compilazione mantieni main.cpp e semplicemente invece
-di usare 'Game::' usi 'World::'
-*/
