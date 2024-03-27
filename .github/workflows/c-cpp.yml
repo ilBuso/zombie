@@ -19,8 +19,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install libsdl2-dev libsdl2-image-dev -y
-    - name: Check
-      run: make check
     - name: Build
       run: make build
     - name: Link

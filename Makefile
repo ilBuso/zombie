@@ -65,6 +65,9 @@ endif
 # Output executable
 EXECUTABLE := zombie
 
+# Valgrind options
+VALGRIND_OPTIONS := --leak-check=full --show-leak-kinds=all
+
 all: clean format build link run
 
 clean:
@@ -106,3 +109,7 @@ link:
 run:
 	@echo "Running"
 	./$(EXECUTABLE)
+
+valgrind:
+    @echo "Running Valgrind..."
+    valgrind $(VALGRIND_OPTIONS) ./$(EXECUTABLE)
