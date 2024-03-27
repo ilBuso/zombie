@@ -111,5 +111,5 @@ run:
 	./$(EXECUTABLE)
 
 valgrind:
-    @echo "Running Valgrind..."
-    valgrind $(VALGRIND_OPTIONS) ./$(EXECUTABLE)
+	@echo "Running Valgrind..."
+	@valgrind $(VALGRIND_OPTIONS) ./$(EXECUTABLE)
