@@ -3,6 +3,7 @@
 #include "../../src/zombie.hpp"
 
 SDL_Rect World::camera = {0, 0, 1550, 1550};
+
 Manager* World::manager = new Manager();
 AssetManager* World::asset_manager = new AssetManager(manager);
 
