@@ -2,8 +2,6 @@
 #define WORLD_HPP
 #include "../../src/zombie.hpp"
 
-#include "../player/player.hpp"
-
 class World : public Game {
   private:
   public:
@@ -16,7 +14,7 @@ class World : public Game {
     Time d_time;
     Map* map;
 
-    static Entity& player;
+    static GameObject* player;
 
     enum group_labels : std::size_t {
         map_group,

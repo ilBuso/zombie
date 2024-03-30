@@ -14,6 +14,9 @@
 // game
 #include "./game/game.hpp"
 
+// gameobject
+#include "./gameobject/gameobject.hpp"
+
 // collision
 #include "./collision/collision.hpp"
 

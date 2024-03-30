@@ -2,18 +2,21 @@
 #define GAMEOBJECT_HPP
 
 #include "../ECS/components/components.hpp"
-#include "../game/game.hpp"
 
 #include <string>
-
-#include <SDL2/SDL_render.h>
 
 class GameObject {
   private:
   public:
-    Entity& gameobject;
+    Entity& entity;
 
-    GameObject(std::string tag, bool is_animated);
+    std::string tag;
+    bool is_animated;
+
+    GameObject(std::string tag, bool is_animated, Entity& m_entity);
+
+    virtual void init();
+    virtual void update(){};
 };
 
 #endif

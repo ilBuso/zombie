@@ -29,7 +29,7 @@ bool Entity::has_group(Group m_group) {
 
 void Entity::add_group(Group m_group) {
     group_bitset[m_group] = true;
-    manager.add_to_group(this, m_group);
+    manager->add_to_group(this, m_group);
 }
 
 void Entity::del_group(Group m_group) {
@@ -67,7 +67,7 @@ void Manager::refresh() {
 }
 
 Entity& Manager::add_entity() {
-    Entity* e = new Entity(*this);
+    Entity* e = new Entity(this);
     std::unique_ptr<Entity> u_ptr{e};
     entities.emplace_back(std::move(u_ptr));
     return *e;

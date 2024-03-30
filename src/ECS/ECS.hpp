@@ -46,18 +46,18 @@ class Component {
 
 class Entity {
   private:
-    Manager& manager;
+    Manager* manager;
     bool active = true;
-    std::vector<std::unique_ptr<Component>> components;
+    std::vector<Component*> components;
     Component_array component_array;
     Component_bitset component_bitset;
     Group_bitset group_bitset;
 
   public:
-    Entity(Manager& m_manager) : manager(m_manager){};
+    Entity(Manager* m_manager) : manager(m_manager){};
 
     virtual void init(){};
-    virtual void update();
+    void update();
     void draw();
     bool is_active();
     void destroy();
@@ -69,10 +69,9 @@ class Entity {
 
     template <typename T, typename... T_args>
     T& add_component(T_args&&... m_args) {
-        T* c(new T(std::forward<T_args>(m_args)...));
+        T* c = new T(std::forward<T_args>(m_args)...);
         c->entity = this;
-        std::unique_ptr<Component> u_ptr{c};
-        components.emplace_back(std::move(u_ptr));
+        components.push_back(c);
 
         component_array[get_component_id<T>()] = c;
         component_bitset[get_component_id<T>()] = true;

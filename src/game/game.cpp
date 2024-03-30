@@ -6,6 +6,7 @@
 #include "../map/map.hpp"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_video.h>
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -60,6 +61,14 @@ void Game::kill() {
 
 void Game::handle_events() {
     SDL_PollEvent(&event);
+
+    switch (event.type) {
+        case SDL_QUIT:
+            is_running = false;
+            break;
+        default:
+            break;
+    }
 }
 
 bool Game::running() {

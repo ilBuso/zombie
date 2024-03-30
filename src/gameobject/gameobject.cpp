@@ -1,11 +1,20 @@
 #include "gameobject.hpp"
 
-#include "../texturemanager/texturemanager.hpp"
-/*
+#include "../../app/world/world.hpp"
 
-una bella idea è se fai le funzioni che ti aggiungono il
-componente specifico tipo `add_transform()` le quali si
-ti aggiungono il componenti ma prima di farlo controllano
-che ci siano tutti i componenti necessari.
+GameObject::GameObject(std::string tag, bool is_animated, Entity& m_entity)
+    : entity(m_entity) {
+    this->tag = tag;
+    this->is_animated = is_animated;
 
-*/
+    init();
+}
+
+void GameObject::init() {
+    entity.add_component<Time>();
+    entity.add_component<Transform>(3);
+    entity.add_component<Collider>(tag);
+    entity.add_component<Sprite>(tag, is_animated);
+    entity.add_component<KeyboardController>();
+    entity.add_group(World::players_group);
+}
