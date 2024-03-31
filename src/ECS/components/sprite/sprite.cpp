@@ -10,19 +10,8 @@ Sprite::Sprite(std::string texture_id) {
 }
 
 Sprite::Sprite(std::string texture_id, bool is_animated) {
-    if (is_animated) {
-        animated = is_animated;
-
-        Animation idle = Animation(0, 2, 500);
-        Animation walk = Animation(1, 4, 100);
-
-        animations.emplace("idle", idle);
-        animations.emplace("walk", walk);
-
-        play_animation("idle");
-
-        set_texture(texture_id);
-    }
+    animated = is_animated;
+    set_texture(texture_id);
 }
 
 Sprite::~Sprite() {}
