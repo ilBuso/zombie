@@ -39,8 +39,10 @@ void Player::update() {
     for (auto& c : World::colliders) {
         SDL_Rect c_collider = c->get_component<Collider>().collider;
         if (Collision::AABB(c_collider, player_collider)) {
-            player->entity.get_component<Transform>().position =
-                player_position;
+            player->entity.get_component<Transform>().position.x -=
+                (10 * player->entity.get_component<Transform>().velocity.x);
+            player->entity.get_component<Transform>().position.y -=
+                (10 * player->entity.get_component<Transform>().velocity.y);
         }
     }
 }
