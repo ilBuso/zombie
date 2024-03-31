@@ -4,7 +4,7 @@
 
 #include "../player/player.hpp"
 
-SDL_Rect World::camera = {0, 0, 140, 970};
+SDL_Rect World::camera = {0, 0, 130, 970};
 
 Manager* World::manager = new Manager();
 AssetManager* World::asset_manager = new AssetManager(manager);
