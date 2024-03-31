@@ -15,8 +15,8 @@ class GameObject {
 
     GameObject(std::string tag, bool is_animated, Entity& m_entity);
 
-    virtual void init();
-    virtual void update(){};
+    // virtual void init() {};
+    // virtual void update() {};
 };
 
 #endif

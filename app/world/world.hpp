@@ -15,13 +15,15 @@ class World : public Game {
     Time d_time;
     Map* map;
 
-    static GameObject* player;
-
     enum group_labels : std::size_t {
         map_group,
         players_group,
         colliders_group,
     };
+
+    static std::vector<Entity*>& tiles;
+    static std::vector<Entity*>& players;
+    static std::vector<Entity*>& colliders;
 
     //******
 

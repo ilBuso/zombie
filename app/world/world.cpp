@@ -2,16 +2,18 @@
 
 #include "../../src/zombie.hpp"
 
+#include "../player/player.hpp"
+
 SDL_Rect World::camera = {0, 0, 1550, 1550};
 
 Manager* World::manager = new Manager();
 AssetManager* World::asset_manager = new AssetManager(manager);
 
-auto& tiles(World::manager->get_group(World::map_group));
-auto& players(World::manager->get_group(World::players_group));
-auto& colliders(World::manager->get_group(World::colliders_group));
-
-GameObject* World::player = nullptr;
+std::vector<Entity*>& World::tiles(World::manager->get_group(World::map_group));
+std::vector<Entity*>&
+    World::players(World::manager->get_group(World::players_group));
+std::vector<Entity*>&
+    World::colliders(World::manager->get_group(World::colliders_group));
 
 void World::setup() {
     asset_manager->add_texture("map", "assets/tiles/map.png");
@@ -20,32 +22,15 @@ void World::setup() {
 
     map = new Map("map", 2, 32);
     map->load_map("assets/map/map.map", 32, 32);
-
-    player = new GameObject("player", true, World::manager->add_entity());
 }
 
 void World::update() {
-    if (player == nullptr) {
-        return;
-    }
-
-    SDL_Rect player_collider =
-        player->entity.get_component<Collider>().collider;
-    Vector2D player_position =
-        player->entity.get_component<Transform>().position;
 
     manager->refresh();
     manager->update();
 
-    for (auto& c : colliders) {
-        SDL_Rect c_collider = c->get_component<Collider>().collider;
-        if (Collision::AABB(c_collider, player_collider)) {
-            player->entity.get_component<Transform>().position =
-                player_position;
-        }
-    }
-
-    Transform player_transform = player->entity.get_component<Transform>();
+    Transform player_transform =
+        Player::player->entity.get_component<Transform>();
 
     camera.x = (player_transform.position.x +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -
