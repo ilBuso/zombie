@@ -4,7 +4,7 @@
 
 #include "../player/player.hpp"
 
-SDL_Rect World::camera = {0, 0, 1550, 1550};
+SDL_Rect World::camera = {0, 0, 140, 970};
 
 Manager* World::manager = new Manager();
 AssetManager* World::asset_manager = new AssetManager(manager);
@@ -32,7 +32,7 @@ void World::update() {
     Transform player_transform =
         Player::player->entity.get_component<Transform>();
 
-    camera.x = (player_transform.position.x +
+    camera.x = (Player::player->entity.get_component<Transform>().position.x +
                 ((player_transform.width * player_transform.scale) / 2.0f)) -
                (Game::window_width / 2.0f);
     camera.y = (player_transform.position.y +
