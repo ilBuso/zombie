@@ -33,8 +33,6 @@ void Player::update() {
 
     SDL_Rect player_collider =
         player->entity.get_component<Collider>().collider;
-    Vector2D player_position =
-        player->entity.get_component<Transform>().position;
 
     for (auto& c : World::colliders) {
         SDL_Rect c_collider = c->get_component<Collider>().collider;
