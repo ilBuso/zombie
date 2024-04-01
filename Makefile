@@ -16,6 +16,8 @@ KEYBOARDCONTROLLER_DIR  := $(COMPONENTS_DIR)/keyboardcontroller
 TILE_DIR         	    := $(COMPONENTS_DIR)/tile
 TIME_DIR         		:= $(COMPONENTS_DIR)/time
 ANIMATION_DIR         	:= $(COMPONENTS_DIR)/animation
+UI_DIR					:= $(COMPONENTS_DIR)/UI
+LABEL_DIR				:= $(UI_DIR)/label
 APP_DIR		         	:= ./app
 WORLD_DIR		        := $(APP_DIR)/world
 PLAYER_DIR		        := $(APP_DIR)/player
@@ -40,6 +42,7 @@ SRC_DIRS := \
     $(TILE_DIR) \
     $(TIME_DIR) \
     $(ANIMATION_DIR) \
+	$(LABEL_DIR) \
     $(APP_DIR) \
 	$(WORLD_DIR) \
 	$(PLAYER_DIR)
@@ -58,7 +61,7 @@ CXX := g++
 CXXFLAGS := -Wall -Wextra -MMD -MP
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-    LIBS := -lSDL2 -lSDL2_image
+    LIBS := -lSDL2 -lSDL2_image -lSDL2_ttf
 endif
 ifeq ($(UNAME_S),Darwin)
     LIBS := -framework SDL2 -framework SDL2_image -framework SDL_ttf

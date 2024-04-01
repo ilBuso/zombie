@@ -1,10 +1,14 @@
 #include "player.hpp"
 
+#include <SDL2/SDL_pixels.h>
+
 GameObject* Player::player = nullptr;
+GameObject* Player::label = nullptr;
 
 void Player::setup() {
     // create game object
     player = new GameObject("player", true, World::manager->add_entity());
+    label = new GameObject("label", false, World::manager->add_entity());
 
     // add components
     player->entity.add_component<Time>();
@@ -13,6 +17,9 @@ void Player::setup() {
     player->entity.add_component<Sprite>(player->tag, player->is_animated);
     player->entity.add_component<KeyboardController>();
     player->entity.add_group(World::players_group);
+
+    SDL_Colour white = {255, 255, 255, 255};
+    label->entity.add_component<UI_Label>(10, 10, "ciao", "at01", white);
 
     // animation
     Animation idle = Animation(0, 2, 500);

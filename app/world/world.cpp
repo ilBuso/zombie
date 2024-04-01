@@ -20,6 +20,8 @@ void World::setup() {
     asset_manager->add_texture("collider", "assets/tiles/collider.png");
     asset_manager->add_texture("player", "assets/animations/player.png");
 
+    asset_manager->add_font("at01", "assets/fonts/at01.ttf", 50);
+
     map = new Map("map", 2, 32);
     map->load_map("assets/map/map.map", 32, 32);
 }
@@ -67,6 +69,8 @@ void World::render() {
     for (auto& c : colliders) {
         c->draw();
     }
+
+    Player::label->entity.draw();
 
     SDL_RenderPresent(renderer);
 }

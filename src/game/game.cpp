@@ -6,6 +6,7 @@
 #include "../map/map.hpp"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_video.h>
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -43,6 +44,11 @@ bool Game::init(void) {
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (!renderer) {
         std::cerr << "Error creating SDL Renderer" << std::endl;
+        return false;
+    }
+
+    if (TTF_Init() != 0) {
+        std::cerr << "Error initializing SDL_ttf" << std::endl;
         return false;
     }
 

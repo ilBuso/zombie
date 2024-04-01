@@ -8,4 +8,6 @@
 #include "./tile/tile.hpp"
 #include "./time/time.hpp"
 #include "./transform/transform.hpp"
+
+#include "./UI/label/label.hpp"
 #endif

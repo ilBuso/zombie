@@ -9,6 +9,7 @@ class Player : public Game {
   private:
   public:
     static GameObject* player;
+    static GameObject* label;
 
     Player(){};
     ~Player(){};
