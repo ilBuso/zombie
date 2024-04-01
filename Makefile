@@ -61,7 +61,7 @@ ifeq ($(UNAME_S),Linux)
     LIBS := -lSDL2 -lSDL2_image
 endif
 ifeq ($(UNAME_S),Darwin)
-    LIBS := -framework SDL2 -framework SDL2_image
+    LIBS := -framework SDL2 -framework SDL2_image -framework SDL_ttf
 endif
 
 # Output executable

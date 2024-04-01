@@ -18,7 +18,7 @@ jobs:
     - name: Install SDL2 and SDL2_image
       run: |
         sudo apt-get update
-        sudo apt-get install libsdl2-dev libsdl2-image-dev -y
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl-ttf2.0-dev -y
     - name: Build
       run: make build
     - name: Link
