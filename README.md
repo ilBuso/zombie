@@ -38,7 +38,7 @@ To build and run this game engine, you will need to have the following installed
 
 1. Clone the repository:
    ```sh
-   git clone [[your-repo-url]](https://github.com/ilBuso/zombie.git)
+   git clone (https://github.com/ilBuso/zombie.git)
    ```
 
 2. Change into the project directory:
